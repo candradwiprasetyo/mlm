@@ -19,7 +19,7 @@
                                                 <th>Email</th>
                                                 <th>Phone</th>
                                                 <th>City</th>
-                                               
+                                               <th>Config</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -36,7 +36,12 @@
                                                 <td><?= $row['user_login']?></td>
                                                  <td><?= $row['user_phone']?></td>
                                                  <td><?= $row['city_name']?></td>
-                                               
+                                               <td style="text-align:center;">
+
+                                                
+                                                    <a href="javascript:void(0)" onclick="confirm_delete(<?= $row['user_id']; ?>, '<?= site_url().'/admin_admin/delete/'; ?>')" class="btn btn-default" ><i class="fa fa-trash-o"></i></a>
+
+                                                </td> 
                                             </tr>
                                            <?php 
 										   $no++;
@@ -47,14 +52,14 @@
                                            
                                           
                                         </tbody>
-                                        <!--
+                                        
                                           <tfoot>
                                             <tr>
-                                                <td colspan="4"><a href="<?= $data_head['add_button'] ?>" class="btn btn-success " >Add</a></td>
+                                                <td colspan="7"><a href="<?= $data_head['add_button'] ?>" class="btn btn-success " >Add</a></td>
                                                
                                             </tr>
                                         </tfoot>
-                                        -->
+                                       
                                     </table>
 
                                 </div><!-- /.box-body -->

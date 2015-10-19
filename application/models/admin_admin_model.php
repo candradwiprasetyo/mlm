@@ -1,6 +1,6 @@
 <?php
 
-class admin_member_model extends CI_Model{
+class admin_admin_model extends CI_Model{
 
 	function __construct(){
 		$this->load->database();
@@ -24,8 +24,8 @@ class admin_member_model extends CI_Model{
 	function read_id($id)
 	{
 		$this->db->select('a.*', 1); // ambil seluruh data
-		$this->db->where('a.slider_id', $id);
-		$query = $this->db->get('sliders a', 1); // parameter limit harus 1
+		$this->db->where('a.user_id', $id);
+		$query = $this->db->get('users a', 1); // parameter limit harus 1
 		$result = null; // inisialisasi variabel. biasakanlah, untuk mencegah warning dari php.
 		foreach($query->result_array() as $row)	$result = ($row); // render dulu dunk!
 		return $result; 
@@ -36,7 +36,7 @@ class admin_member_model extends CI_Model{
 	function create($data){
 
 		$this->db->trans_start();
-		$this->db->insert('sliders', $data);
+		$this->db->insert('users', $data);
 		$id = $this->db->insert_id();
 		
 		$this->db->trans_complete();
@@ -55,8 +55,8 @@ class admin_member_model extends CI_Model{
 	function delete($id){
 
 		$this->db->trans_start();
-		$this->db->where('slider_id', $id);
-		$this->db->delete('sliders');
+		$this->db->where('user_id', $id);
+		$this->db->delete('users');
 		$this->db->trans_complete();
 		
 	}
