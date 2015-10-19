@@ -20,8 +20,18 @@ class Admin_account_model extends CI_Model{
 	function read_id($id)
 	{
 		$this->db->select('a.*', 1); // ambil seluruh data
-		$this->db->where('a.page_id', $id);
-		$query = $this->db->get('pages a', 1); // parameter limit harus 1
+		$this->db->where('a.user_id', $id);
+		$query = $this->db->get('users a', 1); // parameter limit harus 1
+		$result = null; // inisialisasi variabel. biasakanlah, untuk mencegah warning dari php.
+		foreach($query->result_array() as $row)	$result = ($row); // render dulu dunk!
+		return $result; 
+	}
+	
+	function read_activation_id($id)
+	{
+		$this->db->select('a.*', 1); // ambil seluruh data
+		$this->db->where('a.user_id', $id);
+		$query = $this->db->get('member_activations a', 1); // parameter limit harus 1
 		$result = null; // inisialisasi variabel. biasakanlah, untuk mencegah warning dari php.
 		foreach($query->result_array() as $row)	$result = ($row); // render dulu dunk!
 		return $result; 
@@ -32,7 +42,7 @@ class Admin_account_model extends CI_Model{
 	function create($data){
 
 		$this->db->trans_start();
-		$this->db->insert('pages', $data);
+		$this->db->insert('member_activations', $data);
 		$id = $this->db->insert_id();
 		
 		$this->db->trans_complete();
@@ -42,8 +52,8 @@ class Admin_account_model extends CI_Model{
 	function update($data, $id){
 
 		$this->db->trans_start();
-		$this->db->where('page_id', $id);
-		$this->db->update('pages', $data);
+		$this->db->where('member_activation_id', $id);
+		$this->db->update('member_activations', $data);
 	
 		$this->db->trans_complete();
 		return $id;
@@ -112,4 +122,19 @@ class Admin_account_model extends CI_Model{
 		return ($result['result']) ? $result['result'] : 0;
 	}
 	
+	function get_img($table, $column, $param){
+
+
+
+		$sql = "select $column as result from $table where $param";
+		
+		$query = $this->db->query($sql);
+		
+		$result = null;
+		foreach ($query->result_array() as $row) $result = ($row);
+		return $result['result'];
+	
+		
+
+	}	
 }

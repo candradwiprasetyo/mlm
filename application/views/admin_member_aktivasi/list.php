@@ -1,4 +1,17 @@
-
+  <?php
+                if(isset($_GET['did']) && $_GET['did'] == 2){
+                ?>
+			  <section class="content_new">
+                   
+               <div class="callout callout-warning">
+                                        <h4>Sukses</h4>
+                                        <p>Proses aktivasi VIP member berhasil</p>
+                                    </div>
+           
+                </section>
+        	<?php
+				}
+			?>
                
                 <!-- Main content -->
                 <section class="content">
@@ -19,7 +32,7 @@
                                                 <th>Email</th>
                                                 <th>Phone</th>
                                                 <th>City</th>
-                                               
+                                                <th>Aktivasi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -36,7 +49,12 @@
                                                 <td><?= $row['user_login']?></td>
                                                  <td><?= $row['user_phone']?></td>
                                                  <td><?= $row['city_name']?></td>
-                                               
+                                                <td style="text-align:center;">
+
+                                                    <a href="<?= site_url() ?>/admin_member_aktivasi/form/<?= $row['member_activation_id']?>" class="btn btn-primary" >Aktivasi</a>
+                                                  
+
+                                                </td> 
                                             </tr>
                                            <?php 
 										   $no++;

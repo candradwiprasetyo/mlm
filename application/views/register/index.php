@@ -75,6 +75,13 @@
                                          </div>
                         <?php
                         
+						}if(isset($_GET['err']) && $_GET['err'] == 1){
+						?>
+                         <div class="form-group">
+                                           <div class="message">Email sudah ada. Silahkan gunakan email lain !</div>
+                                         </div>
+                        <?php
+                        
 						}
 						
 						?>

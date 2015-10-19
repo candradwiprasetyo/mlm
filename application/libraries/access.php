@@ -35,6 +35,19 @@ class Access
 		);
 	}
 	
+	function get_member_activation()
+	{
+		$ci = & get_instance();
+		$sql = "select count(*) as result from member_activations where status = '0'
+				";
+		
+		$query = $ci->db->query($sql);
+		
+		$result = null;
+		foreach ($query->result_array() as $row) $result = ($row);
+		return $result['result'];
+	}
+	
 	public function format_date($date){
 		$phpdate = strtotime( $date );
 		$new_date = date( 'd M Y', $phpdate );

@@ -42,6 +42,11 @@ class Register extends CI_Controller {
 		$data['city_id'] 						= $this->input->post('i_city_id');
 		$data['reveral_id']						= ($this->session->userdata('reveral_id')) ? $this->session->userdata('reveral_id') : 0;
 		
+		$get_exist_login = $this->register_model->get_exist_login($data['user_login']);
+		
+		if($get_exist_login > 0){
+			redirect("register?err=1");
+		}else{
 		
 		
 		// upload gambar
@@ -85,6 +90,7 @@ class Register extends CI_Controller {
 		}
 		
 		header("Location: ../register?did=1");
+		}
 		
  	}
 	

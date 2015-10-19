@@ -22,7 +22,20 @@ function get_show_hide(id){
 </script>
 
 <!-- Content Header (Page header) -->
-        
+				  <?php
+                if(isset($_GET['did']) && $_GET['did'] == 1){
+                ?>
+			  <section class="content_new">
+                   
+               <div class="callout callout-warning">
+                                        <h4>Sukses</h4>
+                                        <p>Terima kasih telah melakukan konfirmasi pembayaran. Aktivasi akun anda menjadi VIP member akan segera kami proses</p>
+                                    </div>
+           
+                </section>
+        	<?php
+				}
+			?>
                 <!-- Main content -->
                 <section class="content">
                     <div class="row">
@@ -44,15 +57,38 @@ function get_show_hide(id){
                                     
                       
                                        
-                                        <div class="col-md-12">
+                                        <div class="col-md-6">
                                       
                                       
                                          <div class="form-group">
                                          <label>My Link</label>
-                                    <input required type="text" name="i_name" class="form-control" placeholder="Slider title" value="<?= @$data['link'] ?>" title="Fill slider title"/>
+                                    <input required type="text" name="i_name" class="form-control" placeholder="Slider title" value="<?= @$data['link'] ?>" title="Fill slider title" disabled="disabled"/>
                                 			</div>
                                         
                                         </div>
+                                        
+                                         <div class="col-md-4">
+                                      
+                                      
+                                         <div class="form-group">
+                                         <label>Status</label>
+                                    <input required type="text" name="i_name" class="form-control" placeholder="Slider title" value="<?= @$data['status'] ?>" title="Fill slider title" disabled="disabled"/>
+                                			</div>
+                                        
+                                        </div>
+                                        <?php
+                                        if($data['activation_status'] == 0){
+										?>
+                                         <div class="col-md-2">
+                                         <div class="form-group">
+                                         <label>&nbsp;</label><br />
+                                   <a href="<?= $data['aktivasi']?>" class="btn btn-primary" >Aktivasi</a>
+                                			</div>
+                                        </div>
+                                        <?php
+                                        
+										}
+										?>
                                         
                                          <div class="col-md-4">
                                          <div class="form-group">

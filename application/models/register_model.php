@@ -90,6 +90,19 @@ class Register_model extends CI_Model{
 		foreach ($query->result_array() as $row) $result = ($row);
 		return $result['result'];
 	}
+	
+	function get_exist_login($login)
+	{
+		$sql = "select count(user_id) as result from users where user_login = '$login'
+				";
+		
+		$query = $this->db->query($sql);
+		
+		$result = null;
+		foreach ($query->result_array() as $row) $result = ($row);
+		
+		return ($result['result']) ? $result['result'] : 0;
+	}
 
 	
 	
