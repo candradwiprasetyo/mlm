@@ -35,7 +35,7 @@
                                                 <td><?= $row['user_name']?></td>
                                                 <td><?= $row['user_login']?></td>
                                                  <td><?= $row['user_phone']?></td>
-                                                 <td><?= $row['city_name']?></td>
+                                                 <td><?= ($row['city_name']) ? $row['city_name'] : $row['other_city_name']?></td>
                                                
                                             </tr>
                                            <?php 

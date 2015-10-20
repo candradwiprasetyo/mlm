@@ -19,8 +19,8 @@ class Admin_account extends CI_Controller {
 	public function index() {
 		
 			$data_head['title'] = "My Account";
-			$data_head['action'] = site_url().'/admin_account/form_action/';
-			$data_head['withdraw'] = site_url().'/admin_account/withdraw/'.$this->session->userdata('user_id');
+			$data_head['action'] = site_url().'admin_account/form_action/';
+			$data_head['withdraw'] = site_url().'admin_account/withdraw/'.$this->session->userdata('user_id');
 			
 			$data_user = array();
 			$result_user = $this->access->get_data_user_admin($this->session->userdata('user_id'));
@@ -39,9 +39,10 @@ class Admin_account extends CI_Controller {
 			$serv = explode("/", $serv);
 			
 			$data['status'] = ($data['activation_status'] == 1) ? "Sudah teraktivasi" : "Belum teraktivasi";
-			$data['aktivasi'] = site_url().'/admin_account/form_aktivasi/'.$this->session->userdata('user_id');
+			$data['aktivasi'] = site_url().'admin_account/form_aktivasi/'.$this->session->userdata('user_id');
 						
-			$server = $_SERVER['HTTP_HOST']."/".$serv[1]."/index.php/register/rev/".$this->session->userdata('user_id');
+			$username = $this->admin_account_model->get_username($this->session->userdata('user_id'));
+			$server = site_url()."rev/".$username;
 			$data['link'] = ($data['activation_status'] == 1) ? $server : "-";
 			$data['my_transfer'] = $this->admin_account_model->get_my_transfer($this->session->userdata('user_id'));
 			$data['new_transfer'] = $this->admin_account_model->get_new_transfer($this->session->userdata('user_id'));
@@ -57,7 +58,7 @@ class Admin_account extends CI_Controller {
 		
 			$data_head['title'] = "Aktivasi ";
 			
-			$data_head['close_button'] = site_url().'/admin_account/';
+			$data_head['close_button'] = site_url().'admin_account/';
 			
 			$data_user = array();
 			$result_user = $this->access->get_data_user_admin($this->session->userdata('user_id'));
@@ -78,7 +79,7 @@ class Admin_account extends CI_Controller {
 				}
 			}
 			
-			$data_head['action'] = site_url().'/admin_account/form_action/'.$data['row_id'];
+			$data_head['action'] = site_url().'admin_account/form_action/'.$data['row_id'];
 			
 			
 			$this->load->view('admin_layout/header', array( 'data_head' => $data_head, 'data_user' => $data_user));

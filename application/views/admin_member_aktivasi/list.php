@@ -48,10 +48,10 @@
                                                 <td><?= $row['user_name']?></td>
                                                 <td><?= $row['user_login']?></td>
                                                  <td><?= $row['user_phone']?></td>
-                                                 <td><?= $row['city_name']?></td>
+                                                 <td><?= ($row['city_name']) ? $row['city_name'] : $row['other_city_name']?></td>
                                                 <td style="text-align:center;">
 
-                                                    <a href="<?= site_url() ?>/admin_member_aktivasi/form/<?= $row['member_activation_id']?>" class="btn btn-primary" >Aktivasi</a>
+                                                    <a href="<?= site_url() ?>admin_member_aktivasi/form/<?= $row['member_activation_id']?>" class="btn btn-primary" >Aktivasi</a>
                                                   
 
                                                 </td> 

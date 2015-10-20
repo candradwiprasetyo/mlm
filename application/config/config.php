@@ -16,7 +16,9 @@
 | environments.
 |
 */
+//$config['base_url'] = 'http://investasionlinebersama.properti-24.com/';
 $config['base_url'] = 'http://localhost/mlm/';
+
 
 /*
 |--------------------------------------------------------------------------
@@ -28,8 +30,8 @@ $config['base_url'] = 'http://localhost/mlm/';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
-
+//$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 /*
 |--------------------------------------------------------------------------
 | URI PROTOCOL

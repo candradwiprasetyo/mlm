@@ -18,7 +18,7 @@ class admin_edit_profile extends CI_Controller {
 	public function form($id = 0) {
 		
 			$data_head['title'] = "Edit Profile";
-			$data_head['action'] = site_url().'/admin_edit_profile/form_action/'.$id;
+			$data_head['action'] = site_url().'admin_edit_profile/form_action/'.$id;
 			
 			$data_user = array();
 			$result_user = $this->access->get_data_user_admin($this->session->userdata('user_id'));

@@ -17,7 +17,7 @@ class Admin_page_content extends CI_Controller {
 	public function index() {
 		
 			$data_head['title'] = "Page content ";
-			$data_head['add_button'] = site_url().'/admin_page_content/form/';
+			$data_head['add_button'] = site_url().'admin_page_content/form/';
 			
 			$data_user = array();
 			$result = $this->access->get_data_user_admin($this->session->userdata('user_id'));
@@ -37,8 +37,8 @@ class Admin_page_content extends CI_Controller {
 	public function form($id = 0) {
 		
 			$data_head['title'] = $this->admin_page_content_model->get_page_name($id);
-			$data_head['action'] = site_url().'/admin_page_content/form_action/'.$id;
-			$data_head['close_button'] = site_url().'/admin_page_content/';
+			$data_head['action'] = site_url().'admin_page_content/form_action/'.$id;
+			$data_head['close_button'] = site_url().'admin_page_content/';
 			
 			$data_user = array();
 			$result_user = $this->access->get_data_user_admin($this->session->userdata('user_id'));

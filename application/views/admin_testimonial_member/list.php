@@ -28,8 +28,8 @@
                                                
                                                 <td style="text-align:center;">
 
-                                                    <a href="<?= site_url() ?>/admin_testimonial_member/form/<?= $row['testimonial_id']?>" class="btn btn-default" ><i class="fa fa-pencil"></i></a>
-                                                    <a href="javascript:void(0)" onclick="confirm_delete(<?= $row['testimonial_id']; ?>, '<?= site_url().'/admin_testimonial_member/delete/'; ?>')" class="btn btn-default" ><i class="fa fa-trash-o"></i></a>
+                                                    <a href="<?= site_url() ?>admin_testimonial_member/form/<?= $row['testimonial_id']?>" class="btn btn-default" ><i class="fa fa-pencil"></i></a>
+                                                    <a href="javascript:void(0)" onclick="confirm_delete(<?= $row['testimonial_id']; ?>, '<?= site_url().'admin_testimonial_member/delete/'; ?>')" class="btn btn-default" ><i class="fa fa-trash-o"></i></a>
 
                                                 </td> 
                                             </tr>

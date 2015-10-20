@@ -17,7 +17,7 @@ class Admin_slider extends CI_Controller {
 	public function index() {
 		
 			$data_head['title'] = "slider ";
-			$data_head['add_button'] = site_url().'/admin_slider/form/';
+			$data_head['add_button'] = site_url().'admin_slider/form/';
 			
 			$data_user = array();
 			$result = $this->access->get_data_user_admin($this->session->userdata('user_id'));
@@ -37,8 +37,8 @@ class Admin_slider extends CI_Controller {
 	public function form($id = 0) {
 		
 			$data_head['title'] = "slider ";
-			$data_head['action'] = site_url().'/admin_slider/form_action/'.$id;
-			$data_head['close_button'] = site_url().'/admin_slider/';
+			$data_head['action'] = site_url().'admin_slider/form_action/'.$id;
+			$data_head['close_button'] = site_url().'admin_slider/';
 			
 			$data_user = array();
 			$result_user = $this->access->get_data_user_admin($this->session->userdata('user_id'));

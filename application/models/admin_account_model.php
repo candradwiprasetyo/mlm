@@ -85,7 +85,10 @@ class Admin_account_model extends CI_Model{
 	
 	function get_my_transfer($id)
 	{
-		$sql = "select sum(transfer) as result from member_reverals where reveral_id = '$id' and status = '1'
+		$sql = "select sum(a.transfer) as result 
+				from member_reverals a 
+				join users b on b.user_id = a.user_id
+				where a.reveral_id = '$id' and status = '1' and b.activation_status = '1'
 				";
 		
 		$query = $this->db->query($sql);
@@ -98,7 +101,10 @@ class Admin_account_model extends CI_Model{
 	
 	function get_new_transfer($id)
 	{
-		$sql = "select sum(transfer) as result from member_reverals where reveral_id = '$id' and status = '0'
+		$sql = "select sum(a.transfer) as result 
+				from member_reverals a 
+				join users b on b.user_id = a.user_id
+				where a.reveral_id = '$id' and status = '0' and b.activation_status = '1'
 				";
 		
 		$query = $this->db->query($sql);
@@ -111,7 +117,10 @@ class Admin_account_model extends CI_Model{
 	
 	function get_total_transfer($id)
 	{
-		$sql = "select sum(transfer) as result from member_reverals where reveral_id = '$id'
+		$sql = "select sum(a.transfer) as result 
+				from member_reverals a 
+				join users b on b.user_id = a.user_id
+				where a.reveral_id = '$id' and b.activation_status = '1'
 				";
 		
 		$query = $this->db->query($sql);
@@ -127,6 +136,22 @@ class Admin_account_model extends CI_Model{
 
 
 		$sql = "select $column as result from $table where $param";
+		
+		$query = $this->db->query($sql);
+		
+		$result = null;
+		foreach ($query->result_array() as $row) $result = ($row);
+		return $result['result'];
+	
+		
+
+	}	
+	
+	function get_username($id){
+
+
+
+		$sql = "select user_code as result from users where user_id = '$id'";
 		
 		$query = $this->db->query($sql);
 		

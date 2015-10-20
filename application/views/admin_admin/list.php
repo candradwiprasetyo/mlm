@@ -39,7 +39,7 @@
                                                <td style="text-align:center;">
 
                                                 
-                                                    <a href="javascript:void(0)" onclick="confirm_delete(<?= $row['user_id']; ?>, '<?= site_url().'/admin_admin/delete/'; ?>')" class="btn btn-default" ><i class="fa fa-trash-o"></i></a>
+                                                    <a href="javascript:void(0)" onclick="confirm_delete(<?= $row['user_id']; ?>, '<?= site_url().'admin_admin/delete/'; ?>')" class="btn btn-default" ><i class="fa fa-trash-o"></i></a>
 
                                                 </td> 
                                             </tr>

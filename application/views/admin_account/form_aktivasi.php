@@ -3,7 +3,10 @@
                    
                <div class="callout callout-warning">
                                         <h4>Cara Pembayaran </h4>
-                                        <p>1. Transfer ke rekening Mandiri 123</p>
+                                        <p>1. Transfer ke salah satu nomor rekening berikut : </p>
+                                        <b><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- 1300154197 Bank BCA a/n Muhamad Riduwan Fauzi</p>
+                                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- 1420014335904 Bank Mandiri a/n Muhamad Riduwan Fauzi</p>
+                                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- 400713530 Bank BNI a/n  Muhamad Riduwan Fauzi</p></b><br />
                                         <p>2. Lakukan konfirmasi pembayaran dengan mengisi data formulir berikut</p>
                                     </div>
            

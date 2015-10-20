@@ -1,3 +1,15 @@
+<script type="text/javascript">
+function select_city(id){
+				var other_city = document.getElementById("i_other_city_name");
+				if(id == 0){
+					other_city.style.display = 'inline';
+				}else{
+					other_city.style.display = 'none';
+				}
+				
+				
+			}
+</script>
 <div class="container" id="mycontent">
 			<div class="row">
 				
@@ -7,8 +19,16 @@
 				
 				<div class="col-md-3 col-lg-3" style="margin-bottom:10px">
 					<div class="login-left">
+                    	<?php
+						if(isset($_GET['err']) && $_GET['err'] == 1){
+						?>
+                        <div class="err_message">Email atau password salah !</div>
+                        <?php
+						}
+						?>
+                        <div></div>
 						<h4>LOGIN</h4>
-						<form action="<?=site_url('home/login')?>" method="post" enctype="multipart/form-data" class="form-login">
+							<form action="<?=site_url('home/login')?>" method="post" enctype="multipart/form-data" class="form-login">
 								<input type="text" class="" name="i_email" placeholder="Email" >
 								<input type="password" class="" name="i_password" placeholder="Password" >
 							<button>LOGIN</button><br />
@@ -30,17 +50,18 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                           <?php 
+                                         <?php 
 										   $no = 1;
 										   $q_n_member = mysql_query("select a.*, b.city_name from users a
-										   							join cities b on b.city_id  = a.city_id
+										   							left join cities b on b.city_id  = a.city_id
+																	where user_type_id = 2
 																	 order by user_id desc limit 5");
 										   while($r_n_member = mysql_fetch_array($q_n_member)){
 											   ?>
                                             <tr>
                                                
                                                 <td><?= $r_n_member['user_name']?></td>
-                                                 <td><?= $r_n_member['city_name']?></td>
+                                                 <td><?= ($r_n_member['city_name']) ? $r_n_member['city_name'] : $r_n_member['other_city_name']?></td>
                                                
                                             </tr>
                                            <?php 
@@ -75,10 +96,24 @@
                                          </div>
                         <?php
                         
-						}if(isset($_GET['err']) && $_GET['err'] == 1){
+						}if(isset($_GET['err_reg']) && $_GET['err_reg'] == 1){
 						?>
                          <div class="form-group">
-                                           <div class="message">Email sudah ada. Silahkan gunakan email lain !</div>
+                                           <div class="message">Email sudah ada. Silahkan gunakan email lain</div>
+                                         </div>
+                        <?php
+                        
+						}else if(isset($_GET['err_reg']) && $_GET['err_reg'] == 2){
+						?>
+                         <div class="form-group">
+                                           <div class="message">Username sudah ada. Silahkan gunakan username lain</div>
+                                         </div>
+                        <?php
+                        
+						}else if(isset($_GET['err_reg']) && $_GET['err_reg'] == 3){
+						?>
+                         <div class="form-group">
+                                           <div class="message">Register gagal. Password dan confirm password harus sama</div>
                                          </div>
                         <?php
                         
@@ -94,6 +129,7 @@
                                                             <div class="form-group">
                                                             <label>Nama</label>
                                                             <input required type="text" name="i_name" class="form-control" placeholder="Nama" value="" title=""/>
+                                                          <input type="hidden" name="i_reveral_id" class="form-control" placeholder="Nama" value="<?= $this->session->userdata('reveral_id') ?>" title=""/>  
                                                             </div>
                                                     </div>
                                                     <div class="col-md-6">
@@ -109,16 +145,18 @@
                                                     <div class="col-md-6">
                                                             <div class="form-group">
                                                             <label>Kota</label>
-                                                              <select id="basic" name="i_city_id" size="1" class="selectpicker show-tick form-control" data-live-search="true" />
+                                                              <select id="basic" name="i_city_id" size="1" class="selectpicker show-tick form-control" data-live-search="true" onchange="select_city(this.value)" />
+                                                              <option value="0">Other</option>
                                            <?php
 										   $q_city = mysql_query("select * from cities order by city_name");
                                            while($r_city = mysql_fetch_array($q_city)){
                                             ?>
-                                             <option value="<?= $r_city['city_id'] ?>"><?= $r_city['city_name']?></option>
+                                             <option value="<?= $r_city['city_id'] ?>" <?php if($r_city['city_id'] == 1){ ?> selected="selected"<?php } ?>><?= $r_city['city_name']?></option>
                                              <?php
                                              }
                                              ?>
-                                           </select>          
+                                           </select>       
+                                               <input type="text" name="i_other_city_name" id="i_other_city_name" class="form-control" placeholder="Kota Lain" value="" title="" style="display:none"/>
                                                             </div>
                                                     </div>
                                                     
@@ -134,14 +172,29 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                             <div class="form-group">
+                                                            <label>Username</label>
+                                                            <input required type="text" name="i_code" class="form-control" placeholder="Username" value="" title=""/>
+                                                            </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-md-6">
+                                                            <div class="form-group">
                                                             <label>Email</label>
                                                             <input required type="text" name="i_email" class="form-control" placeholder="Email" value="" title=""/>
                                                             </div>
                                                     </div>
+                                                    
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                         <label>Password</label>
                                                             <input required type="password" name="i_password" class="form-control" placeholder="Password" value="" title=""/>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                        <label>Confirm Password</label>
+                                                            <input required type="password" name="i_confirm_password" class="form-control" placeholder="Confirm Password" value="" title=""/>
                                                         </div>
                                                     </div>
                                                 </div>

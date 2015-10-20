@@ -22,7 +22,7 @@
 						<h4 class="menu-bottom-title">Kontak Kami</h4>
 						<ul class="menu-bottom-list">
 							  <li>
-							    Investasi Online Bersama™ -   ( I O B )™
+							   Investasi Online Bersama ( I O B )
 						  </li>
 						      <li>
 						        Email : <a href="mailto:investasionlinebersama@gmail.com">investasionlinebersama@gmail.com</a>
@@ -35,8 +35,8 @@
                               </li>
 						</ul>
                         
-                       <a href="#"><div class="icon_footer"><i class="fa fa-facebook fa-1x"></i></div></a>
-                        <a href="#"><div class="icon_footer"><i class="fa fa-twitter fa-1x"></i></div></a>
+                       <a href="https://www.facebook.com/Investasi-Online-Bersama-483933108452683/"><div class="icon_footer"><i class="fa fa-facebook fa-1x"></i></div></a>
+                        <a href="https://twitter.com/iob4freedom"><div class="icon_footer"><i class="fa fa-twitter fa-1x"></i></div></a>
                          <a href="#"><div class="icon_footer"><i class="fa fa-instagram fa-1x"></i></div></a>
 					</div>
 					

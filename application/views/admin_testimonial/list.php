@@ -102,11 +102,11 @@
 												<?php
                                                 if($row['testimonial_status'] == 0){
 												?>
-												 <a href="<?= site_url() ?>/admin_testimonial/active/<?= $row['testimonial_id']?>" class="btn btn-default" ><i class="fa fa-check"></i></a>
+												 <a href="<?= site_url() ?>admin_testimonial/active/<?= $row['testimonial_id']?>" class="btn btn-default" ><i class="fa fa-check"></i></a>
 												<?php
 												}else{
 												?>
-                                                    <a href="<?= site_url() ?>/admin_testimonial/non_active/<?= $row['testimonial_id']?>" class="btn btn-default" >X</a>
+                                                    <a href="<?= site_url() ?>admin_testimonial/non_active/<?= $row['testimonial_id']?>" class="btn btn-default" >X</a>
                                                 <?php
 												}
 												?>

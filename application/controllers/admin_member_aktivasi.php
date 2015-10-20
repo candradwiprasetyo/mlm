@@ -17,7 +17,7 @@ class admin_member_aktivasi extends CI_Controller {
 	public function index() {
 		
 			$data_head['title'] = "Aktivasi VIP Member ";
-			$data_head['add_button'] = site_url().'/admin_member_aktivasi/form/';
+			$data_head['add_button'] = site_url().'admin_member_aktivasi/form/';
 			
 			$data_user = array();
 			$result = $this->access->get_data_user_admin($this->session->userdata('user_id'));
@@ -37,8 +37,8 @@ class admin_member_aktivasi extends CI_Controller {
 	public function form($id = 0) {
 		
 			$data_head['title'] = "Aktivasi VIP Member ";
-			$data_head['action'] = site_url().'/admin_member_aktivasi/form_action/'.$id;
-			$data_head['close_button'] = site_url().'/admin_member_aktivasi/';
+			$data_head['action'] = site_url().'admin_member_aktivasi/form_action/'.$id;
+			$data_head['close_button'] = site_url().'admin_member_aktivasi/';
 			
 			$data_user = array();
 			$result_user = $this->access->get_data_user_admin($this->session->userdata('user_id'));

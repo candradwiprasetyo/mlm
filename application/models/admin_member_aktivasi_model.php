@@ -10,7 +10,7 @@ class admin_member_aktivasi_model extends CI_Model{
 		$query = "select a.*, b.*, c.city_name
 					from member_activations a
 					join users b on b.user_id = a.user_id
-					join cities c on c.city_id = b.city_id
+					left join cities c on c.city_id = b.city_id
 					where status = 0
 					order by member_activation_id 
 					";
@@ -28,7 +28,7 @@ class admin_member_aktivasi_model extends CI_Model{
 		$this->db->select('a.*, b.*, c.city_name', 1); // ambil seluruh data
 		$this->db->where('a.member_activation_id', $id);
 		$this->db->join('users b', 'b.user_id = a.user_id');
-		$this->db->join('cities c', 'c.city_id = b.city_id');
+		$this->db->join('cities c', 'c.city_id = b.city_id', 'left');
 		$query = $this->db->get('member_activations a', 1); // parameter limit harus 1
 		$result = null; // inisialisasi variabel. biasakanlah, untuk mencegah warning dari php.
 		foreach($query->result_array() as $row)	$result = ($row); // render dulu dunk!

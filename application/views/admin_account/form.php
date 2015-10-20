@@ -62,7 +62,7 @@ function get_show_hide(id){
                                       
                                          <div class="form-group">
                                          <label>My Link</label>
-                                    <input required type="text" name="i_name" class="form-control" placeholder="Slider title" value="<?= @$data['link'] ?>" title="Fill slider title" disabled="disabled"/>
+                                    <input required type="text" name="i_name" class="form-control" placeholder="Slider title" value="<?= @$data['link'] ?>" title="Fill slider title"/>
                                 			</div>
                                         
                                         </div>
@@ -159,7 +159,7 @@ function get_show_hide(id){
 										   $q_member1 = mysql_query("select a.*, b.*, c.city_name
 										   							from member_reverals a 
 																	join users b on b.user_id = a.user_id
-																	join cities c on c.city_id = b.city_id
+																	left join cities c on c.city_id = b.city_id
 																	where a.reveral_id = '".$this->session->userdata('user_id')."' and level = 1");
 										   while($r_member1 = mysql_fetch_array($q_member1)){
 											   
@@ -174,9 +174,9 @@ function get_show_hide(id){
                                                 <td width="17%"><?= $r_member1['user_name']?></td>
                                                 <td width="15%"><?= $r_member1['user_login']?></td>
                                                  <td width="10%"><?= $r_member1['user_phone']?></td>
-                                                 <td width="20%"><?= $r_member1['city_name']?></td>
-                                                 <td width="8%" align="right" ><?= $r_member1['transfer']?></td>
-                                                 <td width="5%" ><?= ($r_member1['status']==1) ? "Paid" : "Unpaid"; ?></td>
+                                                 <td width="20%"><?= ($r_member1['city_name']) ? $r_member1['city_name'] : $r_member1['other_city_name'];?></td>
+                                                 <td width="8%" align="right" ><?= ($r_member1['activation_status']==1) ?$r_member1['transfer'] : "-"; ?></td>
+                                                 <td width="5%" ><?= ($r_member1['activation_status']==1) ? "Paid" : "Unpaid"; ?></td>
                                                   <td width="10%" style="text-align:center;">
                                                     <a href="#" class="btn btn-success " onclick="return get_show_hide(<?= $r_member1['member_reveral_id'] ?>)">Show/hide</a>
                                                 </td> 
@@ -193,7 +193,7 @@ function get_show_hide(id){
 										   $q_member2 = mysql_query("select a.*, b.*, c.city_name
 										   							from member_reverals a 
 																	join users b on b.user_id = a.user_id
-																	join cities c on c.city_id = b.city_id
+																	left join cities c on c.city_id = b.city_id
 																	where a.reveral_id = '".$r_member1['user_id']."' and level = 1");
 										   while($r_member2 = mysql_fetch_array($q_member2)){
 											   $q_member_detail2 = mysql_query("select * from member_reverals 
@@ -210,9 +210,9 @@ function get_show_hide(id){
                                                 <td width="17%"><?= $r_member2['user_name']?></td>
                                                 <td width="15%"><?= $r_member2['user_login']?></td>
                                                  <td width="10%"><?= $r_member2['user_phone']?></td>
-                                                 <td width="20%"><?= $r_member2['city_name']?></td>
-                                                 <td width="8%" align="right" ><?= $r_member_detail2['transfer']?></td>
-                                                 <td width="5%" ><?= ($r_member_detail2['status']==1) ? "Paid" : "Unpaid"; ?></td>
+                                                <td width="20%"><?= ($r_member2['city_name']) ? $r_member2['city_name'] : $r_member2['other_city_name'];?></td>
+                                                 <td width="8%" align="right" ><?= ($r_member2['activation_status']==1) ?$r_member2['transfer'] : "-"; ?></td>
+                                                 <td width="5%" ><?= ($r_member2['activation_status']==1) ? "Paid" : "Unpaid"; ?></td>
                                                   <td width="10%" style="text-align:center;">
                                                     <a href="#" class="btn btn-success " onclick="return get_show_hide(<?= $r_member2['member_reveral_id'] ?>)">Show/hide</a>
                                                 </td> 
@@ -228,7 +228,7 @@ function get_show_hide(id){
 										   $q_member3 = mysql_query("select a.*, b.*, c.city_name
 										   							from member_reverals a 
 																	join users b on b.user_id = a.user_id
-																	join cities c on c.city_id = b.city_id
+																	left join cities c on c.city_id = b.city_id
 																	where a.reveral_id = '".$r_member2['user_id']."' and level = 1");
 										   while($r_member3 = mysql_fetch_array($q_member3)){
 											   $q_member_detail3 = mysql_query("select * from member_reverals 
@@ -245,9 +245,9 @@ function get_show_hide(id){
                                                 <td width="17%"><?= $r_member3['user_name']?></td>
                                                 <td width="15%"><?= $r_member3['user_login']?></td>
                                                  <td width="10%"><?= $r_member3['user_phone']?></td>
-                                                 <td width="20%"><?= $r_member3['city_name']?></td>
-                                                 <td width="8%" align="right" ><?= $r_member_detail3['transfer']?></td>
-                                                 <td width="5%" ><?= ($r_member_detail3['status']==1) ? "Paid" : "Unpaid"; ?></td>
+                                                 <td width="20%"><?= ($r_member3['city_name']) ? $r_member3['city_name'] : $r_member3['other_city_name'];?></td>
+                                                 <td width="8%" align="right" ><?= ($r_member3['activation_status']==1) ?$r_member3['transfer'] : "-"; ?></td>
+                                                 <td width="5%" ><?= ($r_member3['activation_status']==1) ? "Paid" : "Unpaid"; ?></td>
                                                   <td width="10%" style="text-align:center;">
                                                     <a href="#" class="btn btn-success " onclick="return get_show_hide(<?= $r_member3['member_reveral_id'] ?>)">Show/hide</a>
                                                 </td> 
@@ -263,7 +263,7 @@ function get_show_hide(id){
 										   $q_member4 = mysql_query("select a.*, b.*, c.city_name
 										   							from member_reverals a 
 																	join users b on b.user_id = a.user_id
-																	join cities c on c.city_id = b.city_id
+																	left join cities c on c.city_id = b.city_id
 																	where a.reveral_id = '".$r_member3['user_id']."' and level = 1");
 										   while($r_member4 = mysql_fetch_array($q_member4)){
 											    $q_member_detail4 = mysql_query("select * from member_reverals 
@@ -280,9 +280,9 @@ function get_show_hide(id){
                                                 <td width="17%"><?= $r_member4['user_name']?></td>
                                                 <td width="15%"><?= $r_member4['user_login']?></td>
                                                  <td width="10%"><?= $r_member4['user_phone']?></td>
-                                                 <td width="20%"><?= $r_member4['city_name']?></td>
-                                                 <td width="8%" align="right" ><?= $r_member_detail4['transfer']?></td>
-                                                 <td width="5%" ><?= ($r_member_detail4['status']==1) ? "Paid" : "Unpaid"; ?></td>
+                                                 <td width="20%"><?= ($r_member4['city_name']) ? $r_member4['city_name'] : $r_member4['other_city_name'];?></td>
+                                                 <td width="8%" align="right" ><?= ($r_member4['activation_status']==1) ?$r_member4['transfer'] : "-"; ?></td>
+                                                 <td width="5%" ><?= ($r_member4['activation_status']==1) ? "Paid" : "Unpaid"; ?></td>
                                                   <td width="10%" style="text-align:center;">
                                                     <a href="#" class="btn btn-success " onclick="return get_show_hide(<?= $r_member4['member_reveral_id'] ?>)">Show/hide</a>
                                                 </td> 
@@ -298,7 +298,7 @@ function get_show_hide(id){
 										   $q_member5 = mysql_query("select a.*, b.*, c.city_name
 										   							from member_reverals a 
 																	join users b on b.user_id = a.user_id
-																	join cities c on c.city_id = b.city_id
+																	left join cities c on c.city_id = b.city_id
 																	where a.reveral_id = '".$r_member4['user_id']."' and level = 1");
 										   while($r_member5 = mysql_fetch_array($q_member5)){
 											   $q_member_detail5 = mysql_query("select * from member_reverals 
@@ -315,9 +315,9 @@ function get_show_hide(id){
                                                 <td width="17%"><?= $r_member5['user_name']?></td>
                                                 <td width="15%"><?= $r_member5['user_login']?></td>
                                                  <td width="10%"><?= $r_member5['user_phone']?></td>
-                                                 <td width="20%"><?= $r_member5['city_name']?></td>
-                                                 <td width="8%" align="right" ><?= $r_member_detail5['transfer']?></td>
-                                                 <td width="5%" ><?= ($r_member_detail5['status']==1) ? "Paid" : "Unpaid"; ?></td>
+                                                <td width="20%"><?= ($r_member5['city_name']) ? $r_member5['city_name'] : $r_member5['other_city_name'];?></td>
+                                                 <td width="8%" align="right" ><?= ($r_member5['activation_status']==1) ?$r_member5['transfer'] : "-"; ?></td>
+                                                 <td width="5%" ><?= ($r_member5['activation_status']==1) ? "Paid" : "Unpaid"; ?></td>
                                                   <td width="10%" style="text-align:center;">
                                                    
                                                 </td> 

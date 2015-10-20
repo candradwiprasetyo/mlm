@@ -30,8 +30,8 @@
                                                
                                                 <td style="text-align:center;">
 
-                                                    <a href="<?= site_url() ?>/admin_page_content/form/<?= $row['page_id']?>" class="btn btn-default" ><i class="fa fa-pencil"></i></a>
-                                                   <!-- <a href="javascript:void(0)" onclick="confirm_delete(<?= $row['page_id']; ?>, '<?= site_url().'/admin_page_content/delete/'; ?>')" class="btn btn-default" ><i class="fa fa-trash-o"></i></a>-->
+                                                    <a href="<?= site_url() ?>admin_page_content/form/<?= $row['page_id']?>" class="btn btn-default" ><i class="fa fa-pencil"></i></a>
+                                                   <!-- <a href="javascript:void(0)" onclick="confirm_delete(<?= $row['page_id']; ?>, '<?= site_url().'admin_page_content/delete/'; ?>')" class="btn btn-default" ><i class="fa fa-trash-o"></i></a>-->
                                                 </td> 
                                             </tr>
                                            <?php 

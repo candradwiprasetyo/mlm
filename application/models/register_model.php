@@ -103,8 +103,32 @@ class Register_model extends CI_Model{
 		
 		return ($result['result']) ? $result['result'] : 0;
 	}
-
 	
+	function get_exist_username($username)
+	{
+		$sql = "select count(user_id) as result from users where user_code = '$username'
+				";
+		
+		$query = $this->db->query($sql);
+		
+		$result = null;
+		foreach ($query->result_array() as $row) $result = ($row);
+		
+		return ($result['result']) ? $result['result'] : 0;
+	}
+
+	function get_user_id($username)
+	{
+		$sql = "select user_id as result from users where user_code = '$username'
+				";
+		
+		$query = $this->db->query($sql);
+		
+		$result = null;
+		foreach ($query->result_array() as $row) $result = ($row);
+		
+		return $result['result'];
+	}
 	
 	
 	

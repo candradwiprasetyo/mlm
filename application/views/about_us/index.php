@@ -7,12 +7,20 @@
 				
 				<div class="col-md-3 col-lg-3" style="margin-bottom:10px">
 					<div class="login-left">
+                    	<?php
+						if(isset($_GET['err']) && $_GET['err'] == 1){
+						?>
+                        <div class="err_message">Email atau password salah !</div>
+                        <?php
+						}
+						?>
+                        <div></div>
 						<h4>LOGIN</h4>
-						<form class="form-login">
-								<input type="text" class="" name="username" placeholder="username" >
-								<input type="password" class="" name="password" placeholder="password" >
-							<button>LOGIN</button><button>Forget Pass</button><br />
-							<a href="#"  class="btn-new-account"><span>Create New Account</span></a>
+							<form action="<?=site_url('home/login')?>" method="post" enctype="multipart/form-data" class="form-login">
+								<input type="text" class="" name="i_email" placeholder="Email" >
+								<input type="password" class="" name="i_password" placeholder="Password" >
+							<button>LOGIN</button><br />
+							<a href="<?=site_url('register')?>"  class="btn-new-account"><span>Create New Account</span></a>
 						</form>
 					</div>
 					
@@ -30,17 +38,18 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                           <?php 
+                                         <?php 
 										   $no = 1;
 										   $q_n_member = mysql_query("select a.*, b.city_name from users a
-										   							join cities b on b.city_id  = a.city_id
+										   							left join cities b on b.city_id  = a.city_id
+																	where user_type_id = 2
 																	 order by user_id desc limit 5");
 										   while($r_n_member = mysql_fetch_array($q_n_member)){
 											   ?>
                                             <tr>
                                                
                                                 <td><?= $r_n_member['user_name']?></td>
-                                                 <td><?= $r_n_member['city_name']?></td>
+                                                 <td><?= ($r_n_member['city_name']) ? $r_n_member['city_name'] : $r_n_member['other_city_name']?></td>
                                                
                                             </tr>
                                            <?php 

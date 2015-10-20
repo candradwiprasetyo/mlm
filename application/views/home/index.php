@@ -41,14 +41,15 @@
                                            <?php 
 										   $no = 1;
 										   $q_n_member = mysql_query("select a.*, b.city_name from users a
-										   							join cities b on b.city_id  = a.city_id
+										   							left join cities b on b.city_id  = a.city_id
+																	where user_type_id = 2
 																	 order by user_id desc limit 5");
 										   while($r_n_member = mysql_fetch_array($q_n_member)){
 											   ?>
                                             <tr>
                                                
                                                 <td><?= $r_n_member['user_name']?></td>
-                                                 <td><?= $r_n_member['city_name']?></td>
+                                                 <td><?= ($r_n_member['city_name']) ? $r_n_member['city_name'] : $r_n_member['other_city_name']?></td>
                                                
                                             </tr>
                                            <?php 

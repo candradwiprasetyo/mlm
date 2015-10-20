@@ -35,6 +35,7 @@ class Register extends CI_Controller {
 		 
 		$data['user_type_id']	 				= 2;
 		$data['user_login'] 					= $this->input->post('i_email');
+		$data['user_code'] 						= $this->input->post('i_code');
 		$data['user_password']	 				= md5($this->input->post('i_password'));
 		$data['user_name']	 					= $this->input->post('i_name');
 		$data['user_phone'] 					= $this->input->post('i_phone');
@@ -42,12 +43,21 @@ class Register extends CI_Controller {
 		$data['city_id'] 						= $this->input->post('i_city_id');
 		$data['reveral_id']						= ($this->session->userdata('reveral_id')) ? $this->session->userdata('reveral_id') : 0;
 		
+		if($data['city_id'] == 0){
+			$data['other_city_name']	 = $this->input->post('i_other_city_name');
+		}
+		
 		$get_exist_login = $this->register_model->get_exist_login($data['user_login']);
 		
-		if($get_exist_login > 0){
-			redirect("register?err=1");
-		}else{
+		$get_exist_username = $this->register_model->get_exist_username($data['user_code']);
 		
+		if($get_exist_login > 0){
+			redirect("register?err_reg=1");
+		}else if($get_exist_username > 0){
+			redirect("register?err_reg=2");
+		}else if($this->input->post('i_password') != $this->input->post('i_confirm_password')){
+			redirect("register?err_reg=3");
+		}else{
 		
 		// upload gambar
 		if($_FILES['i_img']['name']){

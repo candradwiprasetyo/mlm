@@ -9,7 +9,7 @@ class admin_admin_model extends CI_Model{
 	function list_data() {
 		$query = "select a.*, b.city_name
 					from users a 
-					join cities b on b.city_id = a.city_id
+					left join cities b on b.city_id = a.city_id
 					where user_type_id = 1
 					order by a.user_id";
         $query = $this->db->query($query);

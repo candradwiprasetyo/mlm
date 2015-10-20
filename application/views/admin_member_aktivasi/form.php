@@ -50,7 +50,7 @@
                                             
                                             <div class="form-group">
                                          <label>Kota</label>
-                                    <input required type="text" name="i_name" class="form-control" placeholder="Slider title" value="<?= @$data['city_name'] ?>" title="Fill slider title" disabled="disabled"/>
+                                    <input required type="text" name="i_name" class="form-control" placeholder="Slider title" value="<?= ($data['city_name']) ? $data['city_name'] : $data['other_city_name'] ?>" title="Fill slider title" disabled="disabled"/>
                                 			</div>
                                          
                                       

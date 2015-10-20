@@ -97,6 +97,7 @@
 							  <li><a href="<?=site_url('testimonial')?>"><span>Testimonials</span></a></li>
 							  <li><a href="<?=site_url('about_us')?>"><span>About us</span></a></li>
 							  <li><a href="<?=site_url('contact_us')?>"><span>Contact us</span></a></li>
+                              <li><a href="#<? //=site_url('news')?>"><span>News</span></a></li>
 						  </ul>
 						</div><!--/.nav-collapse -->
 				   </div>
