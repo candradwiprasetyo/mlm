@@ -31,8 +31,12 @@ function select_city(id){
 							<form action="<?=site_url('home/login')?>" method="post" enctype="multipart/form-data" class="form-login">
 								<input type="text" class="" name="i_email" placeholder="Email" >
 								<input type="password" class="" name="i_password" placeholder="Password" >
-							<button>LOGIN</button><br />
+							<button style="width:100%;">LOGIN</button>
+                            <br />
+                            <br />
 							<a href="<?=site_url('register')?>"  class="btn-new-account"><span>Create New Account</span></a>
+                            <br />
+							<a href="<?=site_url('register/forgot_password')?>"  class="btn-new-account"><span>Forgot Password</span></a>
 						</form>
 					</div>
 					
