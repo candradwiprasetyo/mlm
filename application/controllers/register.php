@@ -20,6 +20,16 @@ class Register extends CI_Controller {
 		
  	}
 	
+	public function forgot_password() {
+		
+		$data['title'] = "Forgot Password";
+		
+ 		$this->load->view('layout/header', array('data' => $data));
+		$this->load->view('register/forgot_password');
+		$this->load->view('layout/footer'); 
+		
+ 	}
+	
 	public function rev($id) {
 		
 		$data['title'] = "Contact Us";
@@ -42,6 +52,13 @@ class Register extends CI_Controller {
 		$data['user_active_status']	 			= 1;
 		$data['city_id'] 						= $this->input->post('i_city_id');
 		$data['reveral_id']						= ($this->session->userdata('reveral_id')) ? $this->session->userdata('reveral_id') : 0;
+		$random 								= rand(1, 999);
+		if(strlen($random) == 1){
+			$random = "00".$random;
+		}elseif(strlen($random) == 2){
+			$random = "0".$random;
+		}
+		$data['user_transfer']					= "200".$random;
 		
 		if($data['city_id'] == 0){
 			$data['other_city_name']	 = $this->input->post('i_other_city_name');
@@ -99,8 +116,40 @@ class Register extends CI_Controller {
 			}
 		}
 		
+		// kirim email
+		$this->sendMail($data['user_login'], $data['user_transfer']);
+		
 		header("Location: ../register?did=1");
 		}
+		
+ 	}
+	
+	public function reset_password() {
+		 
+		$data['email'] 					= $this->input->post('i_email');
+		
+	
+		$get_exist_login = $this->register_model->get_exist_login($data['email']);
+		
+
+    	$chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    	$new_password = substr(str_shuffle($chars),0,8);
+		
+		$this->register_model->update_password($data['email'], $new_password);
+		
+		if($get_exist_login > 0){
+			// kirim email
+			$this->sendMailReset($data['email'], $new_password);
+		
+			redirect("register/forgot_password?did=1");
+			
+		}else {
+			redirect("register/forgot_password?err_reset=1");
+		}
+		
+		
+		
+		
 		
  	}
 	
@@ -126,5 +175,93 @@ class Register extends CI_Controller {
 			
 			return $new_name;
 	}
+	
+	/*function sendMail(){
+		$this->load->library('email');
+
+		$this->email->initialize(array(
+		  'protocol' => 'smtp',
+		  'smtp_host' => 'ssl://smtp.googlemail.com',
+		  'smtp_user' => 'bisnisiob@gmail.com',
+		  'smtp_pass' => 'hondatoyotasuzuki',
+		  'smtp_port' => 465,
+		  'crlf' => "\r\n",
+		  'newline' => "\r\n"
+		));
+		
+		$this->email->from('bisnisiob@gmail.com', 'Admin IOB');
+		$this->email->to('candradwiprasetyo@gmail.com');
+		//$this->email->cc('another@another-example.com');
+		//$this->email->bcc('them@their-example.com');
+		$this->email->subject('Email Test');
+		$this->email->message('Testing the email class.');
+		$this->email->send();
+		
+		echo $this->email->print_debugger();
+	}*/
+	
+	function sendMail($email, $transfer) {
+		
+        $ci = get_instance();
+        $ci->load->library('email');
+        $config['protocol'] = "smtp";
+        $config['smtp_host'] = "ssl://smtp.gmail.com";
+        $config['smtp_port'] = "465";
+        $config['smtp_user'] = "bisnisiob@gmail.com";
+        $config['smtp_pass'] = "hondatoyotasuzuki";
+        $config['charset'] = "utf-8";
+        $config['mailtype'] = "html";
+        $config['newline'] = "\r\n";
+        $config['mailtype'] = 'html';
+        
+		
+        $ci->email->initialize($config);
+ 		
+		$data['total_transfer'] = $transfer;
+		
+        $ci->email->from('bisnisiob@gmail.com', 'Admin IOB');
+        $ci->email->to($email);
+        $ci->email->subject('Registrasi IOB');
+       
+        $message=$this->load->view('register/email',$data,TRUE);
+		$ci->email->message($message);
+		if ($this->email->send()) {
+            //echo 'Email sent.';
+        } else {
+            //show_error($this->email->print_debugger());
+        }
+    }
+	
+	function sendMailReset($email, $new_password) {
+		
+        $ci = get_instance();
+        $ci->load->library('email');
+        $config['protocol'] = "smtp";
+        $config['smtp_host'] = "ssl://smtp.gmail.com";
+        $config['smtp_port'] = "465";
+        $config['smtp_user'] = "bisnisiob@gmail.com";
+        $config['smtp_pass'] = "hondatoyotasuzuki";
+        $config['charset'] = "utf-8";
+        $config['mailtype'] = "html";
+        $config['newline'] = "\r\n";
+        $config['mailtype'] = 'html';
+        
+		
+        $ci->email->initialize($config);
+ 		
+		$data['new_password'] = $new_password;
+		
+        $ci->email->from('bisnisiob@gmail.com', 'Admin IOB');
+        $ci->email->to($email);
+        $ci->email->subject('Reset Password IOB');
+       
+        $message=$this->load->view('register/reset_password',$data,TRUE);
+		$ci->email->message($message);
+		if ($this->email->send()) {
+            //echo 'Email sent.';
+        } else {
+            //show_error($this->email->print_debugger());
+        }
+    }
 	
 }

@@ -38,6 +38,43 @@ function get_show_hide(id){
 			?>
                 <!-- Main content -->
                 <section class="content">
+                
+                <?php
+                if($data['activation_status'] == 0){
+					 if($data['exist_activation'] == 0){
+				?>
+                 <div class="row">
+                     <div class="col-md-12">
+                             <div class="box">
+                                <div class="box-body2 table-responsive" style="padding:20px; ">
+                                  <h2>Selamat !</h2>
+                                  <p>Anda telah mengambil keputusan yang tepat telah bergabung bersama kami di bisnis IOB . Tinggal selangkah lagi untuk memulai menjalankan bisnis dengan potensi penghasilan Jutaan bahkan Milyaran rupiah .</p>
+                                  <ol>
+                                    <li>Aktifkan status member Anda menjadi Verified Member dengan cara melakukan pembayaran <span style="font-size:20px; color:#F00; font-weight:bold;"><?= "Rp".number_format($data['user_transfer'], 0, ",", ".") ?></span> ke salah satu dari rekening di bawah :</li>
+                                  </ol>
+                                  <ul>
+                                    <li><strong>Bank BCA 1300154197 a/n Muhamad Riduwan Fauzi</strong></li>
+                                    <li><strong>Bank Mandiri 1420014335904 a/n Muhamad Riduwan Fauzi</strong></li>
+                                    <li><strong>Bank BNI 400713530 a/n Muhamad Riduwan Fauzi</strong></li>
+                                  </ul>
+                                  <ol>
+                                    <li>Setelah Anda melakukan pembayaran kemudian silahkan login di Member Area, kemudian lakukan konfirmasi sesuai prosedur .</li>
+                                    <li>Tunggu proses checking konfirmasi dari Admin IOB 1x24 jam,setelah selesai maka </li>
+                                  </ol>
+<p>Selamat Anda sudah bisa memulai menjalankan bisnis Anda .</p>
+                                  <p>Terima kasih telah mempercayai IOB sebagai partner bisnis Anda untuk meraih impian dan </p>
+                                  <p>mencapai kesuksesan.</p>
+                                  <br />
+									<div style="font-size:11px; color:#ccc;"></div>
+                               </div><!-- /.box-body -->
+                            </div><!-- /.box -->
+                     </div>
+                 </div>
+                 <?php
+					 }
+				}
+				 ?>
+                
                     <div class="row">
                       
                         <!-- right column -->

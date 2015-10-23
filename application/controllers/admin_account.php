@@ -34,6 +34,12 @@ class Admin_account extends CI_Controller {
 					$data  = $result;
 				}
 			
+			$result_activation = $this->admin_account_model->read_activation_id($this->session->userdata('user_id'));
+			if($result_activation){
+				$data['exist_activation']  = 1;
+			}else{
+				$data['exist_activation']  = 0;
+			}
 			
 			$serv = $_SERVER['PHP_SELF'];
 			$serv = explode("/", $serv);
