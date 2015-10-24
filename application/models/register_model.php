@@ -138,7 +138,7 @@ class Register_model extends CI_Model{
 		$this->db->update('users', $data);
 	
 		$this->db->trans_complete();
-		return $id;
+		//return $id;
 	}
 	
 	

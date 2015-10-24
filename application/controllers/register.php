@@ -140,6 +140,8 @@ class Register extends CI_Controller {
 		if($get_exist_login > 0){
 			// kirim email
 			$this->sendMailReset($data['email'], $new_password);
+			//$this->sendMailReset_manual();
+		
 		
 			redirect("register/forgot_password?did=1");
 			
@@ -204,13 +206,15 @@ class Register extends CI_Controller {
 		
         $ci = get_instance();
         $ci->load->library('email');
+        /*
         $config['protocol'] = "smtp";
         $config['smtp_host'] = "ssl://smtp.gmail.com";
         $config['smtp_port'] = "465";
         $config['smtp_user'] = "bisnisiob@gmail.com";
         $config['smtp_pass'] = "hondatoyotasuzuki";
+        */
+        
         $config['charset'] = "utf-8";
-        $config['mailtype'] = "html";
         $config['newline'] = "\r\n";
         $config['mailtype'] = 'html';
         
@@ -236,13 +240,14 @@ class Register extends CI_Controller {
 		
         $ci = get_instance();
         $ci->load->library('email');
+        /*
         $config['protocol'] = "smtp";
         $config['smtp_host'] = "ssl://smtp.gmail.com";
         $config['smtp_port'] = "465";
         $config['smtp_user'] = "bisnisiob@gmail.com";
         $config['smtp_pass'] = "hondatoyotasuzuki";
+        */
         $config['charset'] = "utf-8";
-        $config['mailtype'] = "html";
         $config['newline'] = "\r\n";
         $config['mailtype'] = 'html';
         
@@ -263,5 +268,50 @@ class Register extends CI_Controller {
             //show_error($this->email->print_debugger());
         }
     }
+    
+    function sendmailreset_manual(){
+			/*
+			$message = "Line 1\r\nLine 2\r\nLine 3";
+
+			// In case any of our lines are larger than 70 characters, we should use wordwrap()
+			$message = wordwrap($message, 70, "\r\n");
+			
+			// Send
+			mail('candradwiprasetyo@gmail.com', 'My Subject', $message);
+			
+			
+			
+			$to      = 'candradwiprasetyo@gmail.com';
+			$subject = 'the subject';
+			$message = 'hello';
+			$headers = "From: investas@investasionlinebersama.com\r\n";
+			$headers .= "Reply-To: bisnisiob@gmail.com\r\n";
+			$headers .= "Return-Path: bisnisiob@gmail.com\r\n";
+			//$headers .= "CC: sombodyelse@example.com\r\n";
+			//$headers .= "BCC: hidden@example.com\r\n";
+			
+			mail($to, $subject, $message, $headers);
+			
+			$this->email->set_newline("\r\n");*/
+			
+			$this->load->library('email');
+
+			$this->email->from('investas@investasionlinebersama.com', 'Your Name');
+			$this->email->to('candradwiprasetyo@gmail.com'); 
+			//$this->email->cc('another@another-example.com'); 
+			//$this->email->bcc('them@their-example.com'); 
+			
+			$this->email->subject('Email Test');
+			$this->email->message('Testing the email class.');	
+			$this->email->set_newline("\r\n");
+			$this->email->send();
+			
+			echo $this->email->print_debugger();
+						
+						 
+						   
+			  
+			    
+	}
 	
 }
