@@ -118,7 +118,7 @@
                                 <i class="glyphicon glyphicon-user"></i>
                                 <span>
                                     <?php
-                                        echo $data_user['user_login'];
+                                        echo $data_user['user_name'];
                                     ?>
                                      <i class="caret"></i></span>
                             </a>
@@ -149,7 +149,7 @@
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="<?= site_url('admin_edit_profile/form/'.$this->session->userdata('user_id')) ?>" class="btn btn-default btn-flat"  style="height:40px !important; padding-top:10px !important">Profile</a>
+                                        <a href="<?= site_url('admin_edit_profile/form/') ?>" class="btn btn-default btn-flat"  style="height:40px !important; padding-top:10px !important">Profile</a>
                                     </div>
                                     <div class="pull-right">
                                         <a href="<?= site_url('admin/logout') ?>" class="btn btn-default btn-flat" style="height:40px !important; padding-top:10px !important">Sign out</a>

@@ -132,12 +132,16 @@ class Register extends CI_Controller {
 		$get_exist_login = $this->register_model->get_exist_login($data['email']);
 		
 
-    	$chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    	$new_password = substr(str_shuffle($chars),0,8);
+    	
 		
-		$this->register_model->update_password($data['email'], $new_password);
+		
 		
 		if($get_exist_login > 0){
+			
+			$chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    		$new_password = substr(str_shuffle($chars),0,8);
+			
+			$this->register_model->update_password($data['email'], $new_password);
 			// kirim email
 			$this->sendMailReset($data['email'], $new_password);
 			//$this->sendMailReset_manual();
@@ -206,13 +210,13 @@ class Register extends CI_Controller {
 		
         $ci = get_instance();
         $ci->load->library('email');
-        /*
+        
         $config['protocol'] = "smtp";
         $config['smtp_host'] = "ssl://smtp.gmail.com";
         $config['smtp_port'] = "465";
         $config['smtp_user'] = "bisnisiob@gmail.com";
         $config['smtp_pass'] = "hondatoyotasuzuki";
-        */
+        
         
         $config['charset'] = "utf-8";
         $config['newline'] = "\r\n";
@@ -240,13 +244,13 @@ class Register extends CI_Controller {
 		
         $ci = get_instance();
         $ci->load->library('email');
-        /*
+        
         $config['protocol'] = "smtp";
         $config['smtp_host'] = "ssl://smtp.gmail.com";
         $config['smtp_port'] = "465";
         $config['smtp_user'] = "bisnisiob@gmail.com";
         $config['smtp_pass'] = "hondatoyotasuzuki";
-        */
+        
         $config['charset'] = "utf-8";
         $config['newline'] = "\r\n";
         $config['mailtype'] = 'html';

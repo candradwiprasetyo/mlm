@@ -1,4 +1,28 @@
-
+  <?php
+                if(isset($_GET['did']) && $_GET['did'] == 1){
+                ?>
+			  <section class="content_new">
+                   
+               <div class="callout callout-warning">
+                                       
+                                        <p>Member berhasil dinonaktifkan</p>
+                                    </div>
+           
+                </section>
+        	<?php
+				}else if(isset($_GET['did']) && $_GET['did'] == 2){
+			?>
+             <section class="content_new">
+                   
+               <div class="callout callout-warning">
+                                       
+                                        <p>Member berhasil diaktifkan</p>
+                                    </div>
+           
+                </section>
+            <?php
+				}
+			?>
                
                 <!-- Main content -->
                 <section class="content">
@@ -19,6 +43,9 @@
                                                 <th>Email</th>
                                                 <th>Phone</th>
                                                 <th>City</th>
+                                                <th>Status</th>
+                                                <th>Downline</th>
+                                               <th>Config</th>
                                                
                                             </tr>
                                         </thead>
@@ -35,7 +62,32 @@
                                                 <td><?= $row['user_name']?></td>
                                                 <td><?= $row['user_login']?></td>
                                                  <td><?= $row['user_phone']?></td>
-                                                 <td><?= ($row['city_name']) ? $row['city_name'] : $row['other_city_name']?></td>
+                                                 
+                                                 <td><?= ($row['city_name']) ? $row['city_name'] : $row['other_city_name']?></td>				
+                                                  <td><?= ($row['user_active_status'] == 1) ? "Aktif" :  "Tidak Aktif"  ?></td>
+                                                 <td style="text-align:center;">
+
+                                                    <a href="<?= site_url() ?>admin_member/form/<?= $row['user_id']?>" class="btn btn-default" >Lihat Downline</a>
+                                                 
+
+                                                </td> 
+                                                 <td style="text-align:center;">
+                                                 <?php
+                                                 if($row['user_active_status'] == 1){
+												 ?>
+	
+                                                     <a href="javascript:void(0)" onclick="confirm_nonactive_member(<?= $row['user_id']; ?>, '<?= site_url().'admin_member/nonactive_member/'; ?>')" class="btn btn-default" ><i class="fa fa-trash-o"></i></a>
+                                                     <?php
+												 }else{
+													 ?>
+                                                     <a href="javascript:void(0)" onclick="confirm_active_member(<?= $row['user_id']; ?>, '<?= site_url().'admin_member/active_member/'; ?>')" class="btn btn-default" title="Aktifkan kembali" ><i class="fa fa-check"></i></a>
+                                                     <?php
+												 }
+													 ?>
+                                                   
+                                                    
+
+                                                </td> 
                                                
                                             </tr>
                                            <?php 

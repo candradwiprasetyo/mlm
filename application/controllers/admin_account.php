@@ -20,7 +20,7 @@ class Admin_account extends CI_Controller {
 		
 			$data_head['title'] = "My Account";
 			$data_head['action'] = site_url().'admin_account/form_action/';
-			$data_head['withdraw'] = site_url().'admin_account/withdraw/'.$this->session->userdata('user_id');
+			$data_head['withdraw'] = site_url().'admin_account/withdraw/';
 			
 			$data_user = array();
 			$result_user = $this->access->get_data_user_admin($this->session->userdata('user_id'));
@@ -45,7 +45,7 @@ class Admin_account extends CI_Controller {
 			$serv = explode("/", $serv);
 			
 			$data['status'] = ($data['activation_status'] == 1) ? "Sudah teraktivasi" : "Belum teraktivasi";
-			$data['aktivasi'] = site_url().'admin_account/form_aktivasi/'.$this->session->userdata('user_id');
+			$data['aktivasi'] = site_url().'admin_account/form_aktivasi/';
 						
 			$username = $this->admin_account_model->get_username($this->session->userdata('user_id'));
 			$server = site_url()."rev/".$username;
@@ -60,14 +60,16 @@ class Admin_account extends CI_Controller {
 		
  	}
 	
-	public function form_aktivasi($id = 0) {
+	public function form_aktivasi() {
 		
 			$data_head['title'] = "Aktivasi ";
+			
+			$id = $this->session->userdata('user_id');
 			
 			$data_head['close_button'] = site_url().'admin_account/';
 			
 			$data_user = array();
-			$result_user = $this->access->get_data_user_admin($this->session->userdata('user_id'));
+			$result_user = $this->access->get_data_user_admin($id);
 			
 			if($result_user){
 				$data_user  = $result_user;
@@ -134,10 +136,9 @@ class Admin_account extends CI_Controller {
 	}
 	
 
-	public function withdraw($id = 0) {
+	public function withdraw() {
 		
-		
-		$this->admin_account_model->withdraw($id);
+		$this->admin_account_model->withdraw($this->session->userdata('user_id'));
 		
 		redirect("admin_account/");
 		

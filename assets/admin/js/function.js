@@ -45,3 +45,18 @@ function confirm_not_approved(id,control){
 		window.location.href = control+id;
 	}
 } 
+
+
+function confirm_nonactive_member(id,control){
+	var a = confirm("Anda yakin ingin menonaktifkan member ini ?");
+	if(a==true){
+		window.location.href = control+id;
+	}
+}
+
+function confirm_active_member(id,control){
+	var a = confirm("Anda yakin ingin mengaktifkan member ini ?");
+	if(a==true){
+		window.location.href = control+id;
+	}
+}

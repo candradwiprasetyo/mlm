@@ -15,13 +15,14 @@ class admin_edit_profile extends CI_Controller {
 	}
 
 	
-	public function form($id = 0) {
+	public function form() {
 		
+			$id = $this->session->userdata('user_id');
 			$data_head['title'] = "Edit Profile";
 			$data_head['action'] = site_url().'admin_edit_profile/form_action/'.$id;
 			
 			$data_user = array();
-			$result_user = $this->access->get_data_user_admin($this->session->userdata('user_id'));
+			$result_user = $this->access->get_data_user_admin($id);
 			
 			if($result_user){
 				$data_user  = $result_user;
@@ -81,7 +82,7 @@ class admin_edit_profile extends CI_Controller {
 			$this->admin_edit_profile_model->update($data, $id);
 		}
 		
-		redirect("admin_edit_profile/form/$id?did=1");
+		redirect("admin_edit_profile/form/?did=1");
 		
 	}
 	

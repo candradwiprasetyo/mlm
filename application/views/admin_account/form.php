@@ -212,7 +212,7 @@ function get_show_hide(id){
                                                 <td width="15%"><?= $r_member1['user_login']?></td>
                                                  <td width="10%"><?= $r_member1['user_phone']?></td>
                                                  <td width="20%"><?= ($r_member1['city_name']) ? $r_member1['city_name'] : $r_member1['other_city_name'];?></td>
-                                                 <td width="8%" align="right" ><?= ($r_member1['activation_status']==1) ?$r_member1['transfer'] : "-"; ?></td>
+                                                 <td width="8%" align="right" ><?= ($r_member1['activation_status']==1) ? $this->access->get_format_number($r_member1['transfer']) : "-"; ?></td>
                                                  <td width="5%" ><?= ($r_member1['activation_status']==1) ? "Paid" : "Unpaid"; ?></td>
                                                   <td width="10%" style="text-align:center;">
                                                     <a href="#" class="btn btn-success " onclick="return get_show_hide(<?= $r_member1['member_reveral_id'] ?>)">Show/hide</a>
@@ -248,7 +248,7 @@ function get_show_hide(id){
                                                 <td width="15%"><?= $r_member2['user_login']?></td>
                                                  <td width="10%"><?= $r_member2['user_phone']?></td>
                                                 <td width="20%"><?= ($r_member2['city_name']) ? $r_member2['city_name'] : $r_member2['other_city_name'];?></td>
-                                                 <td width="8%" align="right" ><?= ($r_member2['activation_status']==1) ?$r_member2['transfer'] : "-"; ?></td>
+                                                 <td width="8%" align="right" ><?= ($r_member2['activation_status']==1) ? $this->access->get_format_number($r_member_detail2['transfer']) : "-"; ?></td>
                                                  <td width="5%" ><?= ($r_member2['activation_status']==1) ? "Paid" : "Unpaid"; ?></td>
                                                   <td width="10%" style="text-align:center;">
                                                     <a href="#" class="btn btn-success " onclick="return get_show_hide(<?= $r_member2['member_reveral_id'] ?>)">Show/hide</a>
@@ -283,7 +283,7 @@ function get_show_hide(id){
                                                 <td width="15%"><?= $r_member3['user_login']?></td>
                                                  <td width="10%"><?= $r_member3['user_phone']?></td>
                                                  <td width="20%"><?= ($r_member3['city_name']) ? $r_member3['city_name'] : $r_member3['other_city_name'];?></td>
-                                                 <td width="8%" align="right" ><?= ($r_member3['activation_status']==1) ?$r_member3['transfer'] : "-"; ?></td>
+                                                 <td width="8%" align="right" ><?= ($r_member3['activation_status']==1) ? $this->access->get_format_number($r_member_detail3['transfer']) : "-"; ?></td>
                                                  <td width="5%" ><?= ($r_member3['activation_status']==1) ? "Paid" : "Unpaid"; ?></td>
                                                   <td width="10%" style="text-align:center;">
                                                     <a href="#" class="btn btn-success " onclick="return get_show_hide(<?= $r_member3['member_reveral_id'] ?>)">Show/hide</a>
@@ -318,7 +318,7 @@ function get_show_hide(id){
                                                 <td width="15%"><?= $r_member4['user_login']?></td>
                                                  <td width="10%"><?= $r_member4['user_phone']?></td>
                                                  <td width="20%"><?= ($r_member4['city_name']) ? $r_member4['city_name'] : $r_member4['other_city_name'];?></td>
-                                                 <td width="8%" align="right" ><?= ($r_member4['activation_status']==1) ?$r_member4['transfer'] : "-"; ?></td>
+                                                 <td width="8%" align="right" ><?= ($r_member4['activation_status']==1) ? $this->access->get_format_number($r_member_detail4['transfer']) : "-"; ?></td>
                                                  <td width="5%" ><?= ($r_member4['activation_status']==1) ? "Paid" : "Unpaid"; ?></td>
                                                   <td width="10%" style="text-align:center;">
                                                     <a href="#" class="btn btn-success " onclick="return get_show_hide(<?= $r_member4['member_reveral_id'] ?>)">Show/hide</a>
@@ -353,7 +353,7 @@ function get_show_hide(id){
                                                 <td width="15%"><?= $r_member5['user_login']?></td>
                                                  <td width="10%"><?= $r_member5['user_phone']?></td>
                                                 <td width="20%"><?= ($r_member5['city_name']) ? $r_member5['city_name'] : $r_member5['other_city_name'];?></td>
-                                                 <td width="8%" align="right" ><?= ($r_member5['activation_status']==1) ?$r_member5['transfer'] : "-"; ?></td>
+                                                 <td width="8%" align="right" ><?= ($r_member5['activation_status']==1) ? $this->access->get_format_number($r_member_detail5['transfer']) : "-"; ?></td>
                                                  <td width="5%" ><?= ($r_member5['activation_status']==1) ? "Paid" : "Unpaid"; ?></td>
                                                   <td width="10%" style="text-align:center;">
                                                    

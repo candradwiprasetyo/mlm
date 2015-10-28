@@ -9,8 +9,14 @@ class admin_member extends CI_Controller {
 		$this->load->library('access');
 		
 		$logged = $this->session->userdata('logged');
+		$user_type_id = $this->session->userdata('user_type_id');
+		
 		if($logged == ""){
-			redirect('home?err=1');
+			redirect('home');
+		}else{
+			if($user_type_id != 1){
+				redirect('forbidden_page?err=1');
+			}
 		}
 	}
  	
@@ -36,9 +42,9 @@ class admin_member extends CI_Controller {
 	
 	public function form($id = 0) {
 		
-			$data_head['title'] = "Member ";
-			$data_head['action'] = site_url().'admin_member/form_action/'.$id;
-			$data_head['close_button'] = site_url().'admin_member/';
+			$data_head['title'] = "Account";
+			$data_head['action'] = site_url().'admin_account/form_action/';
+			$data_head['withdraw'] = site_url().'admin_account/withdraw/';
 			
 			$data_user = array();
 			$result_user = $this->access->get_data_user_admin($this->session->userdata('user_id'));
@@ -47,17 +53,25 @@ class admin_member extends CI_Controller {
 				$data_user  = $result_user;
 			}
 			
-			
-			$data = array();
-			$data['row_id'] = "";
-			if($id){
-				$result = $this->admin_member_model->read_id($id);
+			$result = $this->admin_member_model->read_id($id);
 				if($result){
 					$data  = $result;
-					$data['row_id'] = $data['slider_id'];
 				}
-			}
+		
 			
+			$serv = $_SERVER['PHP_SELF'];
+			$serv = explode("/", $serv);
+			$data['id'] = $id;
+			
+			$data['status'] = ($data['activation_status'] == 1) ? "Sudah teraktivasi" : "Belum teraktivasi";
+			$data['aktivasi'] = site_url().'admin_member/form_aktivasi/';
+						
+			$username = $this->admin_member_model->get_username($this->session->userdata('user_id'));
+			$server = site_url()."rev/".$username;
+			$data['link'] = ($data['activation_status'] == 1) ? $server : "-";
+			$data['my_transfer'] = $this->admin_member_model->get_my_transfer($id);
+			$data['new_transfer'] = $this->admin_member_model->get_new_transfer($id);
+			$data['total_transfer'] = $this->admin_member_model->get_total_transfer($id);
 			
 			$this->load->view('admin_layout/header', array( 'data_head' => $data_head, 'data_user' => $data_user));
 			$this->load->view('admin_member/form', array('data_head' => $data_head, 'data' => $data));
@@ -65,88 +79,19 @@ class admin_member extends CI_Controller {
 		
  	}
 	
-	public function form_action($id = 0) {
+	public function nonactive_member($id){
+		$this->admin_member_model->nonactive_member($id);
 		
-		// upload gambar
-		if($_FILES['i_img']['name']){
-
-			if($id){
-				$get_img = $this->admin_member_model->get_img("sliders", "slider_img", "slider_id = '$id'");
-			
-				$oldfile   = "assets/images/slider/".$get_img;
-			
-				if( file_exists( $oldfile ) ){
-	    			unlink( $oldfile );
-				}
-			}
-
-			$new_name = $this->upload_img('i_img');
-
-			$data['slider_img'] 					= str_replace(" ", "_", $new_name);
-
-		}
-
-		
-
-		 
-		 // simpan di table
-		$data['slider_name']	 				= $this->input->post('i_name');
-		$data['slider_desc'] 					= $this->input->post('editor');
-		
-		
-		if($id){
-			$this->admin_member_model->update($data, $id);
-		}else{
-			$data['slider_date'] = date("Y-m-d H:m:s");
-			$this->admin_member_model->create($data);
-		}
+		redirect('admin_member/?did=1');
+	}
+	
+	public function active_member($id){
+		$this->admin_member_model->active_member($id);
 		
 		redirect('admin_member/?did=2');
-		
-	}
-	
-	public function delete($id){
-		$this->admin_member_model->delete($id);
-		
-		
-				$get_img = $this->admin_member_model->get_img("sliders", "slider_img", "slider_id = '$id'");
-			
-				$oldfile   = "assets/images/slider/".$get_img;
-			
-				if( file_exists( $oldfile ) ){
-	    			unlink( $oldfile );
-				}
-			
-		
-		redirect('admin_member/?did=3');
-	}
-
-	public function upload_img($img){
-		$new_name = time()."_".$_FILES[$img]['name'];
-			
-			$configUpload['upload_path']    = './assets/images/slider/';                 #the folder placed in the root of project
-			$configUpload['allowed_types']  = 'gif|jpg|png|bmp|jpeg';       #allowed types description
-			$config['max_size']	= '100';
-			$config['max_width'] = '1024';
-			$config['max_height'] = '768';                       #max height
-			$configUpload['encrypt_name']   = false;   
-			$configUpload['file_name'] 		= $new_name;                      	#encrypt name of the uploaded file
-			$this->load->library('upload', $configUpload);                  #init the upload class
-			if(!$this->upload->do_upload($img)){
-				$uploadedDetails    = $this->upload->display_errors();
-			}else{
-				$uploadedDetails    = $this->upload->data(); 
-				//$this->_createThumbnail($uploadedDetails['file_name']);
-	 
-				//$thumbnail_name = $uploadedDetails['raw_name']. '_thumb' .$uploadedDetails['file_ext'];   
-			}
-			
-			return $new_name;
 	}
 
 	
-
-
 
 	
 }

@@ -9,8 +9,14 @@ class Admin_page_content extends CI_Controller {
 		$this->load->library('access');
 		
 		$logged = $this->session->userdata('logged');
+		$user_type_id = $this->session->userdata('user_type_id');
+		
 		if($logged == ""){
-			redirect('home?err=1');
+			redirect('home');
+		}else{
+			if($user_type_id != 1){
+				redirect('forbidden_page?err=1');
+			}
 		}
 	}
  	

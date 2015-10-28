@@ -105,6 +105,10 @@ class Access
 		
 		return $result;
 	}
+	
+	public function get_format_number($data){
+		return number_format($data, 0, ',', '.');
+	}
 
 	
 }

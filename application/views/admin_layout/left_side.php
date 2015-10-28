@@ -18,7 +18,7 @@
                             <p style="color:#a0acbf; ">
                                         <?php
                                        
-                                        echo "Welcome, ".$data_user['user_login'];
+                                        echo "Welcome, ".$data_user['user_name'];
                                         ?>
                                 </p>
 
