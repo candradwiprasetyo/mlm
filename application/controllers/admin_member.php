@@ -92,6 +92,21 @@ class admin_member extends CI_Controller {
 	}
 
 	
-
+	public function delete($id){
+		
+		
+		
+				$get_img = $this->admin_member_model->get_img("users", "user_img", "user_id = '$id'");
+			
+				$oldfile   = "assets/images/user/".$get_img;
+			
+				if( file_exists( $oldfile ) ){
+	    			unlink( $oldfile );
+				}
+				
+		$this->admin_member_model->delete($id);	
+		
+		redirect('admin_member/?did=3');
+	}
 	
 }

@@ -21,6 +21,17 @@
            
                 </section>
             <?php
+				}else if(isset($_GET['did']) && $_GET['did'] == 3){
+			?>
+             <section class="content_new">
+                   
+               <div class="callout callout-warning">
+                                       
+                                        <p>Member berhasil dihapus</p>
+                                    </div>
+           
+                </section>
+            <?php
 				}
 			?>
                
@@ -76,16 +87,16 @@
                                                  if($row['user_active_status'] == 1){
 												 ?>
 	
-                                                     <a href="javascript:void(0)" onclick="confirm_nonactive_member(<?= $row['user_id']; ?>, '<?= site_url().'admin_member/nonactive_member/'; ?>')" class="btn btn-default" ><i class="fa fa-trash-o"></i></a>
+                                                     <a href="javascript:void(0)" onclick="confirm_nonactive_member(<?= $row['user_id']; ?>, '<?= site_url().'admin_member/nonactive_member/'; ?>')" class="btn btn-default" >Nonaktifkan</a>
                                                      <?php
 												 }else{
 													 ?>
-                                                     <a href="javascript:void(0)" onclick="confirm_active_member(<?= $row['user_id']; ?>, '<?= site_url().'admin_member/active_member/'; ?>')" class="btn btn-default" title="Aktifkan kembali" ><i class="fa fa-check"></i></a>
+                                                     <a href="javascript:void(0)" onclick="confirm_active_member(<?= $row['user_id']; ?>, '<?= site_url().'admin_member/active_member/'; ?>')" class="btn btn-default" title="Aktifkan kembali" >Aktifkan</a>
                                                      <?php
 												 }
 													 ?>
                                                    
-                                                    
+                                                     <a href="javascript:void(0)" onclick="confirm_delete(<?= $row['user_id']; ?>, '<?= site_url().'admin_member/delete/'; ?>')" class="btn btn-default" ><i class="fa fa-trash-o"></i></a>
 
                                                 </td> 
                                                

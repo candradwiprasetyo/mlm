@@ -14,8 +14,39 @@ class Register extends CI_Controller {
 		
 		$data['title'] = "Join Us / Register";
 		
+		// captcha
+		$this->load->helper('captcha');
+		$vals = array(
+			'image' => 'test', 
+			'img_path' => './assets/capimg/',
+			'img_url' => site_url().'assets/capimg/',
+			 'img_width'	=> 100,
+			'img_height' => 30,
+			'expiration' => 7200
+			);
+		
+		$cap = create_captcha($vals);
+		
+		$data_cap = array(
+			'captcha_time'	=> $cap['time'],
+			'ip_address'	=> $this->input->ip_address(),
+			'word'	=> $cap['word']
+			
+			);
+			
+			// First, delete old captchas
+		$expiration = time()-7200; // Two hour limit
+		$this->db->query("DELETE FROM captcha WHERE captcha_time < ".$expiration);	
+		
+		$query = $this->db->insert_string('captcha', $data_cap);
+		$this->db->query($query);
+		
+		$this->session->set_userdata('keycode',md5($cap['word']));
+		$data_img['captcha_img'] = $cap['image'];
+
+		
  		$this->load->view('layout/header', array('data' => $data));
-		$this->load->view('register/index');
+		$this->load->view('register/index', $data_img);
 		$this->load->view('layout/footer'); 
 		
  	}
@@ -59,67 +90,77 @@ class Register extends CI_Controller {
 			$random = "0".$random;
 		}
 		$data['user_transfer']					= "200".$random;
+		$data['user_bank_name'] 				= $this->input->post('i_user_bank_name');
+		$data['user_bank_account_number'] 		= $this->input->post('i_user_bank_account_number');
+		$data['user_bank_account_name'] 		= $this->input->post('i_user_bank_account_name');
 		
 		if($data['city_id'] == 0){
 			$data['other_city_name']	 = $this->input->post('i_other_city_name');
 		}
 		
-		$get_exist_login = $this->register_model->get_exist_login($data['user_login']);
+		$captcha = $this->input->post('i_captcha');
+		if(md5($captcha)==$this->session->userdata('keycode')){
 		
-		$get_exist_username = $this->register_model->get_exist_username($data['user_code']);
-		
-		if($get_exist_login > 0){
-			redirect("register?err_reg=1");
-		}else if($get_exist_username > 0){
-			redirect("register?err_reg=2");
-		}else if($this->input->post('i_password') != $this->input->post('i_confirm_password')){
-			redirect("register?err_reg=3");
+			$get_exist_login = $this->register_model->get_exist_login($data['user_login']);
+			
+			$get_exist_username = $this->register_model->get_exist_username($data['user_code']);
+			
+			if($get_exist_login > 0){
+				redirect("register?err_reg=1");
+			}else if($get_exist_username > 0){
+				redirect("register?err_reg=2");
+			}else if($this->input->post('i_password') != $this->input->post('i_confirm_password')){
+				redirect("register?err_reg=3");
+			}else{
+			
+			// upload gambar
+			if($_FILES['i_img']['name']){
+				$new_name = $this->upload_img('i_img');
+	
+				$data['user_img'] 					= str_replace(" ", "_", $new_name);
+	
+			}
+			
+			$id = $this->register_model->create_user($data);
+			
+			if($data['reveral_id']!=0){
+				// create komisi reveral 1
+				$reveral1 = $data['reveral_id'];
+				$this->register_model->create_reveral($reveral1, $id, 1);
+				
+				// create komisi reveral 2
+				$reveral2 = $this->register_model->get_reveral($reveral1);
+				if($reveral2){
+					$this->register_model->create_reveral($reveral2, $id, 2);
+				}
+				
+				// create komisi reveral 3
+				$reveral3 = $this->register_model->get_reveral($reveral2);
+				if($reveral3){
+					$this->register_model->create_reveral($reveral3, $id, 3);
+				}
+				
+				// create komisi reveral 4
+				$reveral4 = $this->register_model->get_reveral($reveral3);
+				if($reveral4){
+					$this->register_model->create_reveral($reveral4, $id, 4);
+				}
+				
+				// create komisi reveral 5
+				$reveral5 = $this->register_model->get_reveral($reveral4);
+				if($reveral5){
+					$this->register_model->create_reveral($reveral5, $id, 5);
+				}
+			}
+			
+			// kirim email
+			$this->sendMail($data['user_login'], $data['user_transfer']);
+			
+			header("Location: ../register?did=1");
+			}
+			
 		}else{
-		
-		// upload gambar
-		if($_FILES['i_img']['name']){
-			$new_name = $this->upload_img('i_img');
-
-			$data['user_img'] 					= str_replace(" ", "_", $new_name);
-
-		}
-		
-		$id = $this->register_model->create_user($data);
-		
-		if($data['reveral_id']!=0){
-			// create komisi reveral 1
-			$reveral1 = $data['reveral_id'];
-			$this->register_model->create_reveral($reveral1, $id, 1);
-			
-			// create komisi reveral 2
-			$reveral2 = $this->register_model->get_reveral($reveral1);
-			if($reveral2){
-				$this->register_model->create_reveral($reveral2, $id, 2);
-			}
-			
-			// create komisi reveral 3
-			$reveral3 = $this->register_model->get_reveral($reveral2);
-			if($reveral3){
-				$this->register_model->create_reveral($reveral3, $id, 3);
-			}
-			
-			// create komisi reveral 4
-			$reveral4 = $this->register_model->get_reveral($reveral3);
-			if($reveral4){
-				$this->register_model->create_reveral($reveral4, $id, 4);
-			}
-			
-			// create komisi reveral 5
-			$reveral5 = $this->register_model->get_reveral($reveral4);
-			if($reveral5){
-				$this->register_model->create_reveral($reveral5, $id, 5);
-			}
-		}
-		
-		// kirim email
-		$this->sendMail($data['user_login'], $data['user_transfer']);
-		
-		header("Location: ../register?did=1");
+			redirect("register?err_reg=4");
 		}
 		
  	}
@@ -216,7 +257,7 @@ class Register extends CI_Controller {
         $config['smtp_port'] = "465";
         $config['smtp_user'] = "bisnisiob@gmail.com";
         $config['smtp_pass'] = "hondatoyotasuzuki";
-        
+        $config['smtp_crypto'] = 'ssl';
         
         $config['charset'] = "utf-8";
         $config['newline'] = "\r\n";
@@ -254,6 +295,7 @@ class Register extends CI_Controller {
         $config['charset'] = "utf-8";
         $config['newline'] = "\r\n";
         $config['mailtype'] = 'html';
+		$config['smtp_crypto'] = 'ssl';
         
 		
         $ci->email->initialize($config);
@@ -289,6 +331,7 @@ class Register extends CI_Controller {
 			$subject = 'the subject';
 			$message = 'hello';
 			$headers = "From: investas@investasionlinebersama.com\r\n";
+			
 			$headers .= "Reply-To: bisnisiob@gmail.com\r\n";
 			$headers .= "Return-Path: bisnisiob@gmail.com\r\n";
 			//$headers .= "CC: sombodyelse@example.com\r\n";

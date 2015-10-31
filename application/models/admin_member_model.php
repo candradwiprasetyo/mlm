@@ -119,6 +119,8 @@ class admin_member_model extends CI_Model{
 
 	}	
 	
+	
+	
 	function get_username($id){
 
 
@@ -156,5 +158,34 @@ class admin_member_model extends CI_Model{
 		$this->db->trans_complete();
 		return $id;
 	}
+	
+	function delete($id){
+
+		$this->db->trans_start();
+		// hapus users
+		$this->db->where('user_id', $id);
+		$this->db->delete('users');
+		
+		// hapus member_activations
+		$this->db->where('user_id', $id);
+		$this->db->delete('member_activations');
+		
+		// hapus member_activations
+		$this->db->where('user_id', $id);
+		$this->db->delete('member_activations');
+		
+		// hapus member_testimonial
+		$this->db->where('user_id', $id);
+		$this->db->delete('testimonials');
+		
+		// hapus member_reverals
+		$this->db->where('reveral_id', $id);
+		$this->db->or_where('user_id', $id);
+		$this->db->delete('member_reverals');
+
+		$this->db->trans_complete();
+		
+	}
+
 	
 }

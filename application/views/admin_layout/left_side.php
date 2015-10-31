@@ -106,7 +106,7 @@
                 
                  <li <?php if(isset($_SESSION['menu_active']) && $_SESSION['menu_active'] == 9){ echo "class='active'"; } ?>>
                             <a href="<?= site_url('admin_member_aktivasi') ?>">
-                                <i class="fa fa-users"></i>
+                                <i class="fa fa-circle"></i>
                                 <span>Aktivasi</span>
                                <small class="badge pull-right bg-yellow"><?= $this->access->get_member_activation(); ?></small>
                             </a>
@@ -115,7 +115,7 @@
                  
                   <li <?php if(isset($_SESSION['menu_active']) && $_SESSION['menu_active'] == 9){ echo "class='active'"; } ?>>
                             <a href="<?= site_url('admin_member') ?>">
-                                <i class="fa fa-users"></i>
+                                <i class="fa fa-circle"></i>
                                 <span>Member</span>
                                
                             </a>
@@ -124,8 +124,17 @@
                   
                    <li <?php if(isset($_SESSION['menu_active']) && $_SESSION['menu_active'] == 9){ echo "class='active'"; } ?>>
                             <a href="<?= site_url('admin_admin') ?>">
-                                <i class="fa fa-users"></i>
+                                <i class="fa fa-circle"></i>
                                 <span>Admin</span>
+                               
+                            </a>
+                            
+                  </li>
+                  
+                  <li <?php if(isset($_SESSION['menu_active']) && $_SESSION['menu_active'] == 10){ echo "class='active'"; } ?>>
+                            <a href="<?= site_url('admin_delete_data') ?>">
+                                <i class="fa fa-circle"></i>
+                                <span>Delete Data</span>
                                
                             </a>
                             

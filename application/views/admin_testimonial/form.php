@@ -29,7 +29,7 @@
                                     <input required type="text" name="i_name" class="form-control" placeholder="testimonial title" value="<?= @$data['testimonial_name'] ?>" title="Fill testimonial title"/>
                                 			</div>
                                          <div class="form-group">
-                                            <label>Description</label>
+                                           
                                            <textarea id="editor" name="editor" rows="10" cols="80">
                                             <?php
                                             echo @$data['testimonial_desc']

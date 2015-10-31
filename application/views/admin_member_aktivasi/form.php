@@ -55,6 +55,30 @@
                                          
                                       
                                         </div>
+                                        
+                                        <div class="row">
+                                                	<div class="col-md-6">
+                                                        <div class="form-group">
+                                                        <label>Nama Bank (Pencairan Komisi)</label>
+                                                            <input required type="text" name="i_user_bank_name" class="form-control" placeholder="Nama Bank" value="<?= $data['user_bank_name'] ?>" title="" disabled="disabled"/>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                        <label>Nomor Rekening (Pencairan Komisi)</label>
+                                                            <input required type="text" name="i_user_bank_account_number" class="form-control" placeholder="Nomor Rekening" value="<?= $data['user_bank_account_number'] ?>" title="" disabled="disabled"/>
+                                                        </div>
+                                                    </div>
+                                                 </div>
+                                                 <div class="row"> 
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                        <label>Atas Nama (Pencairan Komisi)</label>
+                                                            <input required type="text" name="i_user_bank_account_name" class="form-control" placeholder="Atas Nama" value="<?= $data['user_bank_account_name'] ?>" title="" disabled="disabled"/>
+                                                        </div>
+                                                    </div>
+                                        		</div>
                                       
                                         
  										

@@ -26,7 +26,7 @@
                                       
                                          
                                          <div class="form-group">
-                                            <label>Description</label>
+                                           
                                            <textarea id="editor" name="editor" rows="10" cols="80" style="height:500px;">
                                             <?php
                                             echo @$data['testimonial_desc']

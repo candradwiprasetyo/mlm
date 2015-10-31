@@ -121,6 +121,13 @@ function select_city(id){
                                          </div>
                         <?php
                         
+						}else if(isset($_GET['err_reg']) && $_GET['err_reg'] == 4){
+						?>
+                         <div class="form-group">
+                                           <div class="message">Captcha salah !</div>
+                                         </div>
+                        <?php
+                        
 						}
 						
 						?>
@@ -186,6 +193,43 @@ function select_city(id){
                                                             <label>Email</label>
                                                             <input required type="text" name="i_email" class="form-control" placeholder="Email" value="" title=""/>
                                                             </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                        <label>Nama Bank</label>
+                                                            <input required type="text" name="i_user_bank_name" class="form-control" placeholder="Nama Bank" value="" title=""/>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                        <label>Nomor Rekening</label>
+                                                            <input required type="text" name="i_user_bank_account_number" class="form-control" placeholder="Nomor Rekening" value="" title=""/>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                        <label>Atas Nama</label>
+                                                            <input required type="text" name="i_user_bank_account_name" class="form-control" placeholder="Atas Nama" value="" title=""/>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-md-6">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                        <label>Captcha</label>
+                                                           <?php echo $captcha_img;?> 
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                        <label>&nbsp;</label>
+                                                          <input required type="password" name="i_captcha" class="form-control" placeholder="Type captcha" value="" title=""/>
+                                                        </div>
+                                                    </div>
                                                     </div>
                                                     
                                                     <div class="col-md-6">

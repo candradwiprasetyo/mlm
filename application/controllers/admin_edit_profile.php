@@ -58,6 +58,11 @@ class admin_edit_profile extends CI_Controller {
 		$data['user_phone']	 				= $this->input->post('i_phone');
 		$data['city_id']	 				= $this->input->post('i_city_id');
 		
+		if($this->session->userdata('user_id')==2){
+			$data['user_bank_name']	 			= $this->input->post('i_user_bank_name');
+			$data['user_bank_account_number']	= $this->input->post('i_user_bank_account_number');
+			$data['user_bank_account_name']	 	= $this->input->post('i_user_bank_account_name');
+		}
 		// upload gambar
 		if($_FILES['i_img']['name']){
 

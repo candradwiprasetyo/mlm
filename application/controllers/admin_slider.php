@@ -112,7 +112,7 @@ class Admin_slider extends CI_Controller {
 	}
 	
 	public function delete($id){
-		$this->admin_slider_model->delete($id);
+		
 		
 		
 				$get_img = $this->admin_slider_model->get_img("sliders", "slider_img", "slider_id = '$id'");
@@ -122,7 +122,7 @@ class Admin_slider extends CI_Controller {
 				if( file_exists( $oldfile ) ){
 	    			unlink( $oldfile );
 				}
-			
+			$this->admin_slider_model->delete($id);
 		
 		redirect('admin_slider/?did=3');
 	}
