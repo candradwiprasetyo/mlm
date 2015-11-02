@@ -227,7 +227,7 @@ function select_city(id){
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                         <label>&nbsp;</label>
-                                                          <input required type="password" name="i_captcha" class="form-control" placeholder="Type captcha" value="" title=""/>
+                                                          <input required type="text" name="i_captcha" class="form-control" placeholder="Type captcha" value="" title=""/>
                                                         </div>
                                                     </div>
                                                     </div>

@@ -19,7 +19,8 @@ class Admin_account_model extends CI_Model{
 
 	function read_id($id)
 	{
-		$this->db->select('a.*', 1); // ambil seluruh data
+		$this->db->select('a.*, b.city_name', 1); // ambil seluruh data
+		$this->db->join('cities b', 'b.city_id = a.city_id');
 		$this->db->where('a.user_id', $id);
 		$query = $this->db->get('users a', 1); // parameter limit harus 1
 		$result = null; // inisialisasi variabel. biasakanlah, untuk mencegah warning dari php.

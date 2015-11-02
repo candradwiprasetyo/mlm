@@ -80,6 +80,110 @@ function get_show_hide(id){
                         <!-- right column -->
                         <div class="col-md-12">
                             <!-- general form elements disabled -->
+                            
+                            <div class="title_page"> My Profile</div>
+                            
+   <form  class="cmxform" id="createForm" action="<?= $data_head['action']?>" method="post" enctype="multipart/form-data" role="form">
+
+                            
+
+                            <div class="box box-cokelat">
+                                
+                               
+                                <div class="box-body">
+                                     <div class="col-md-2">
+                                     <div class="row">
+                                     <div class="col-md-12">
+                                                      <div class="form-group">
+                                                        <label>Foto</label>
+                                                   <?php
+												   
+												    $img_prof = ($data['user_img']) ? $data['user_img'] : "default.jpg";   
+													?>
+                                        <br />
+                                        <img src="<?= base_url(); ?>assets/images/user/<?= $img_prof ?>" style="width:100%;"/>
+                                        </div>
+                                       </div>
+                                                            </div>
+                                                    </div>
+                      					<div class="col-md-10">
+                                          <div class="row">
+                                          
+                                                    <div class="col-md-6">
+                                                            <div class="form-group">
+                                                            <label>Nama</label>
+                                                            <input required type="text" name="i_name" class="form-control" placeholder="Nama" value="<?= $data['user_name'] ?>" title="" disabled="disabled"/>
+                                                            </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                        <label>Telepon</label>
+                                                            <input required type="text" name="i_phone" class="form-control" placeholder="Telepon" value="<?= $data['user_phone'] ?>" title="" disabled="disabled"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="row">
+                                                  
+                                                    <div class="col-md-6">
+                                                            <div class="form-group">
+                                                            <label>Kota</label>
+                                                               <input required type="text" name="i_phone" class="form-control" placeholder="Telepon" value="<?= $data['city_name'] ?>" title="" disabled="disabled"/>
+                                                            </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-md-6">
+                                                            <div class="form-group">
+                                                            <label>Email</label>
+                                                            <input required type="text" name="i_email" class="form-control" placeholder="Email" value="<?= $data['user_login'] ?>" title="" disabled="disabled"/>
+                                                            </div>
+                                                    </div>
+
+                                                    </div>
+                                                    
+                                                    <div class="row">
+                                                  
+                                                    <div class="col-md-4">
+                                                            <div class="form-group">
+                                                            <label>Nama Bank</label>
+                                                               <input required type="text" name="i_phone" class="form-control" placeholder="Telepon" value="<?= $data['user_bank_name'] ?>" title="" disabled="disabled"/>
+                                                            </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-md-4">
+                                                            <div class="form-group">
+                                                            <label>Nomor Rekening</label>
+                                                            <input required type="text" name="i_email" class="form-control" placeholder="Email" value="<?= $data['user_bank_account_number'] ?>" title="" disabled="disabled"/>
+                                                            </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-md-4">
+                                                            <div class="form-group">
+                                                            <label>Atas Nama</label>
+                                                            <input required type="text" name="i_email" class="form-control" placeholder="Email" value="<?= $data['user_bank_account_name'] ?>" title="" disabled="disabled"/>
+                                                            </div>
+                                                    </div>
+                                                    </div>	
+                                                    
+                                                    
+                                                    
+                                                </div>
+                                                
+                                                
+                                               
+                                               
+                                        
+ 										
+                                        <div style="clear:both;"></div>
+                                     
+                                </div><!-- /.box-body -->
+                                   <div class="box-footer">
+                                <a href="<?= site_url() ?>admin_edit_profile/form/" class="btn btn-success">Edit </a>
+                               
+                             </div>
+                               
+                            </div><!-- /.box -->
+                            </form>
 
                           
                             <div class="title_page"> <?= $data_head['title'] ?></div>
@@ -127,6 +231,9 @@ function get_show_hide(id){
 										}
 										?>
                                         
+                                      
+                                            
+                                     
                                          <div class="col-md-4">
                                          <div class="form-group">
                                          <label>My Transfer (Rp)</label>

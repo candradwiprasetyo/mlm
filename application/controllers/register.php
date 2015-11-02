@@ -257,7 +257,7 @@ class Register extends CI_Controller {
         $config['smtp_port'] = "465";
         $config['smtp_user'] = "bisnisiob@gmail.com";
         $config['smtp_pass'] = "hondatoyotasuzuki";
-        $config['smtp_crypto'] = 'ssl';
+        //$config['smtp_crypto'] = 'ssl';
         
         $config['charset'] = "utf-8";
         $config['newline'] = "\r\n";
@@ -295,7 +295,7 @@ class Register extends CI_Controller {
         $config['charset'] = "utf-8";
         $config['newline'] = "\r\n";
         $config['mailtype'] = 'html';
-		$config['smtp_crypto'] = 'ssl';
+		//$config['smtp_crypto'] = 'ssl';
         
 		
         $ci->email->initialize($config);

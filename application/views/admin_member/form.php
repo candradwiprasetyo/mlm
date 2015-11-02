@@ -93,9 +93,35 @@ function get_show_hide(id){
                                                     </div>
                                                     </div>
                                                     
+                                                    <div class="row">
+                                                  
+                                                    <div class="col-md-4">
+                                                            <div class="form-group">
+                                                            <label>Nama Bank</label>
+                                                               <input required type="text" name="i_phone" class="form-control" placeholder="Telepon" value="<?= $data['user_bank_name'] ?>" title="" disabled="disabled"/>
+                                                            </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-md-4">
+                                                            <div class="form-group">
+                                                            <label>Nomor Rekening</label>
+                                                            <input required type="text" name="i_email" class="form-control" placeholder="Email" value="<?= $data['user_bank_account_number'] ?>" title="" disabled="disabled"/>
+                                                            </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-md-4">
+                                                            <div class="form-group">
+                                                            <label>Atas Nama</label>
+                                                            <input required type="text" name="i_email" class="form-control" placeholder="Email" value="<?= $data['user_bank_account_name'] ?>" title="" disabled="disabled"/>
+                                                            </div>
+                                                    </div>
+                                                    </div>	
+                                                    
                                                     
                                                     
                                                 </div>
+                                                
+                                                
                                                
                                                
                                         
