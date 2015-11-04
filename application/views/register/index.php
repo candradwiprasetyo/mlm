@@ -197,6 +197,20 @@ function select_city(id){
                                                     
                                                     <div class="col-md-6">
                                                         <div class="form-group">
+                                                        <label>Password</label>
+                                                            <input required type="password" name="i_password" class="form-control" placeholder="Password" value="" title=""/>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                        <label>Confirm Password</label>
+                                                            <input required type="password" name="i_confirm_password" class="form-control" placeholder="Confirm Password" value="" title=""/>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
                                                         <label>Nama Bank</label>
                                                             <input required type="text" name="i_user_bank_name" class="form-control" placeholder="Nama Bank" value="" title=""/>
                                                         </div>
@@ -217,34 +231,17 @@ function select_city(id){
                                                     </div>
                                                     
                                                     <div class="col-md-6">
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-12">
                                                         <div class="form-group">
-                                                        <label>Captcha</label>
-                                                           <?php echo $captcha_img;?> 
+                                                        
+                                                           <?php echo $this->recaptcha->render(); ?>
                                                         </div>
                                                     </div>
                                                     
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                        <label>&nbsp;</label>
-                                                          <input required type="text" name="i_captcha" class="form-control" placeholder="Type captcha" value="" title=""/>
-                                                        </div>
-                                                    </div>
+                                                    
                                                     </div>
                                                     
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                        <label>Password</label>
-                                                            <input required type="password" name="i_password" class="form-control" placeholder="Password" value="" title=""/>
-                                                        </div>
-                                                    </div>
                                                     
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                        <label>Confirm Password</label>
-                                                            <input required type="password" name="i_confirm_password" class="form-control" placeholder="Confirm Password" value="" title=""/>
-                                                        </div>
-                                                    </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-6">

@@ -8,13 +8,15 @@ class Register extends CI_Controller {
 		$this->load->library('access');
 		$this->load->library('session');
 		$this->load->helper('url');
+		$this->load->library('recaptcha');
 	}
  	
 	public function index() {
 		
 		$data['title'] = "Join Us / Register";
 		
-		// captcha
+		// captcha lama
+		/*
 		$this->load->helper('captcha');
 		$vals = array(
 			'image' => 'test', 
@@ -43,10 +45,10 @@ class Register extends CI_Controller {
 		
 		$this->session->set_userdata('keycode',md5($cap['word']));
 		$data_img['captcha_img'] = $cap['image'];
-
+	*/
 		
  		$this->load->view('layout/header', array('data' => $data));
-		$this->load->view('register/index', $data_img);
+		$this->load->view('register/index');
 		$this->load->view('layout/footer'); 
 		
  	}
@@ -98,8 +100,16 @@ class Register extends CI_Controller {
 			$data['other_city_name']	 = $this->input->post('i_other_city_name');
 		}
 		
-		$captcha = $this->input->post('i_captcha');
-		if(md5($captcha)==$this->session->userdata('keycode')){
+		//$captcha = $this->input->post('i_captcha');
+		//if(md5($captcha)==$this->session->userdata('keycode')){
+		// Catch the user's answer
+		$captcha_answer = $this->input->post('g-recaptcha-response');
+		
+		// Verify user's answer
+		$response = $this->recaptcha->verifyResponse($captcha_answer);
+		
+		// Processing ...	
+		if ($response['success']) {
 		
 			$get_exist_login = $this->register_model->get_exist_login($data['user_login']);
 			
