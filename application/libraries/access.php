@@ -1,5 +1,7 @@
 <?php 
 
+
+
 class Access
 {
 	
@@ -108,6 +110,65 @@ class Access
 	
 	public function get_format_number($data){
 		return number_format($data, 0, ',', '.');
+	}
+	
+	public function get_visitor(){
+		$ci = & get_instance();
+		$sql = "select max(visitor_counter) as result from visitors
+				";
+		
+		$query = $ci->db->query($sql);
+		
+		$result = null;
+		foreach ($query->result_array() as $row) $result = ($row);
+		$hasil = ($result['result']) ? $result['result'] : 0;
+		return $hasil + 1;
+	}
+	
+	public function create_visitor($visitor_counter){
+		$ci = & get_instance();
+		$sql = "insert into visitors values('', '$visitor_counter', '".date("Y-m-d")."')
+				";
+		
+		$query = $ci->db->query($sql);
+		
+	
+	}
+	
+	public function get_visitor_all(){
+		$ci = & get_instance();
+		$sql = "select count(visitor_counter) as result from visitors
+				";
+		
+		$query = $ci->db->query($sql);
+		
+		$result = null;
+		foreach ($query->result_array() as $row) $result = ($row);
+		return ($result['result']) ? $result['result'] : 0;
+	}
+	
+	public function get_visitor_today(){
+		$ci = & get_instance();
+		$sql = "select count(visitor_counter) as result from visitors where visitor_date = '".date('Y-m-d')."'
+				";
+		
+		$query = $ci->db->query($sql);
+		
+		$result = null;
+		foreach ($query->result_array() as $row) $result = ($row);
+		return ($result['result']) ? $result['result'] : 0;
+	}
+	
+	public function get_visitor_counter($counter){
+		$ci = & get_instance();
+		$sql = "select count(visitor_counter) as result from visitors where visitor_counter <= '$counter' and visitor_date = '".date("Y-m-d")."'
+				";
+		
+		$query = $ci->db->query($sql);
+		
+		$result = null;
+		foreach ($query->result_array() as $row) $result = ($row);
+		return ($result['result']) ? $result['result'] : 0;
 	}
 
 	

@@ -9,6 +9,7 @@ class Rev extends CI_Controller {
 		$this->load->library('session');
 		$this->load->helper('url');
 		
+		$this->load->library('recaptcha');
 		
 	}
 	

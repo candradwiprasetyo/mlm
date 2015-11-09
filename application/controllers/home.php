@@ -14,9 +14,17 @@ class Home extends CI_Controller {
 		
 		$data['title'] = "Home";
 		
+		if(!$this->session->userdata('visitor')){
+			$visitor_counter = $this->access->get_visitor();
+			$this->session->set_userdata('visitor', $visitor_counter);
+			$this->access->create_visitor($visitor_counter);
+		}
+		
  		$this->load->view('layout/header', array('data' => $data));
 		$this->load->view('home/index');
 		$this->load->view('layout/footer'); 
+		
+		
 		
  	}
 	
@@ -42,6 +50,11 @@ class Home extends CI_Controller {
 		}
 	
 		
+	}
+	
+	public function delete_session() {
+		$this->session->unset_userdata('visitor');
+		redirect('home');
 	}
 	
 }

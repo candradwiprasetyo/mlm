@@ -12,6 +12,12 @@ class Marketing extends CI_Controller {
  	
 	public function index() {
 		
+		if(!$this->session->userdata('visitor')){
+			$visitor_counter = $this->access->get_visitor();
+			$this->session->set_userdata('visitor', $visitor_counter);
+			$this->access->create_visitor($visitor_counter);
+		}
+		
 		$data['title'] = "Marketing & Business Plan";
 		
  		$this->load->view('layout/header', array('data' => $data));

@@ -76,6 +76,28 @@
                                     </table>
                         </span>
 					</div>
+                    
+                     <div class="banner-login">
+						<span class="testbenner">
+                       	
+                            
+                             <table width="100%" border="0" cellspacing="0" cellpadding="0" style="color:#fff; font-size:12px; font-weight:bold;">
+  <tr>
+    <td>Total Visitor</td>
+    <td align="right" style="font-size:20px"><?= $this->access->get_visitor_all() ?></td>
+  </tr>
+  <tr>
+    <td>Total Visit Today</td>
+    <td align="right" style="font-size:20px"><?= $this->access->get_visitor_today() ?></td>
+  </tr>
+  <tr>
+    <td>You are visitor</td>
+    <td align="right" style="font-size:20px"><?= $this->access->get_visitor_counter($this->session->userdata('visitor')) ?></td>
+  </tr>
+</table>
+
+                      </span>
+				  </div>
 					
 				</div>
 				<div class="col-md-9 col-lg-9" id="maincontent">

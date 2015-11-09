@@ -54,7 +54,8 @@
                                                 <th>Email</th>
                                                 <th>Phone</th>
                                                 <th>City</th>
-                                                <th>Status</th>
+                                                 <th>Status Aktivasi</th>
+                                                <th>Status Member</th>
                                                 <th>Downline</th>
                                                <th>Config</th>
                                                
@@ -75,7 +76,9 @@
                                                  <td><?= $row['user_phone']?></td>
                                                  
                                                  <td><?= ($row['city_name']) ? $row['city_name'] : $row['other_city_name']?></td>				
+                                                 <td><?= ($row['activation_status'] == 1) ? "Sudah teraktivasi" : "Belum teraktivasi"; ?></td>
                                                   <td><?= ($row['user_active_status'] == 1) ? "Aktif" :  "Tidak Aktif"  ?></td>
+                                                  
                                                  <td style="text-align:center;">
 
                                                     <a href="<?= site_url() ?>admin_member/form/<?= $row['user_id']?>" class="btn btn-default" >Lihat Downline</a>

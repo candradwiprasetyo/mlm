@@ -37,7 +37,7 @@
                         
                        <a href="https://www.facebook.com/Investasi-Online-Bersama-483933108452683/"><div class="icon_footer"><i class="fa fa-facebook fa-1x"></i></div></a>
                         <a href="https://twitter.com/iob4freedom"><div class="icon_footer"><i class="fa fa-twitter fa-1x"></i></div></a>
-                         <a href="#"><div class="icon_footer"><i class="fa fa-instagram fa-1x"></i></div></a>
+                         <a href="https://instagram.com/investasionlinebersama/"><div class="icon_footer"><i class="fa fa-instagram fa-1x"></i></div></a>
 					</div>
 					
 				</div>

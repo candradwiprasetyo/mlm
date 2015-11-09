@@ -9,6 +9,12 @@ class Register extends CI_Controller {
 		$this->load->library('session');
 		$this->load->helper('url');
 		$this->load->library('recaptcha');
+		
+		if(!$this->session->userdata('visitor')){
+			$visitor_counter = $this->access->get_visitor();
+			$this->session->set_userdata('visitor', $visitor_counter);
+			$this->access->create_visitor($visitor_counter);
+		}
 	}
  	
 	public function index() {
