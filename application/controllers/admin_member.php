@@ -91,6 +91,12 @@ class admin_member extends CI_Controller {
 		redirect('admin_member/?did=2');
 	}
 
+	public function activation_manual($id){
+		$this->admin_member_model->activation_manual($id);
+		
+		redirect('admin_member/?did=4');
+	}
+
 	
 	public function delete($id){
 		

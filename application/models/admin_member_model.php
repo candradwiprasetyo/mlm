@@ -148,6 +148,17 @@ class admin_member_model extends CI_Model{
 		return $id;
 	}
 	
+	function activation_manual($id){
+
+		$this->db->trans_start();
+		$data['activation_status'] = 1;
+		$this->db->where('user_id', $id);
+		$this->db->update('users', $data);
+	
+		$this->db->trans_complete();
+		return $id;
+	}
+
 	function active_member($id){
 
 		$this->db->trans_start();

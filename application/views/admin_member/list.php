@@ -32,7 +32,18 @@
            
                 </section>
             <?php
-				}
+				}else if(isset($_GET['did']) && $_GET['did'] == 4){
+            ?>
+             <section class="content_new">
+                   
+               <div class="callout callout-warning">
+                                       
+                                        <p>Aktivasi member berhasil</p>
+                                    </div>
+           
+                </section>
+            <?php
+                }
 			?>
                
                 <!-- Main content -->
@@ -52,8 +63,10 @@
                                                 <th>Photo</th>
                                                 <th>Name</th>
                                                 <th>Email</th>
+                                                <!--
                                                 <th>Phone</th>
                                                 <th>City</th>
+                                                -->
                                                  <th>Status Aktivasi</th>
                                                 <th>Status Member</th>
                                                 <th>Downline</th>
@@ -73,15 +86,17 @@
                                                 <td><img src="<?= base_url(); ?>assets/images/user/<?= $img ?>" width="40" height="40" /></td>
                                                 <td><?= $row['user_name']?></td>
                                                 <td><?= $row['user_login']?></td>
+                                                <!--
                                                  <td><?= $row['user_phone']?></td>
                                                  
                                                  <td><?= ($row['city_name']) ? $row['city_name'] : $row['other_city_name']?></td>				
+                                                 -->
                                                  <td><?= ($row['activation_status'] == 1) ? "Sudah teraktivasi" : "Belum teraktivasi"; ?></td>
                                                   <td><?= ($row['user_active_status'] == 1) ? "Aktif" :  "Tidak Aktif"  ?></td>
                                                   
                                                  <td style="text-align:center;">
 
-                                                    <a href="<?= site_url() ?>admin_member/form/<?= $row['user_id']?>" class="btn btn-default" >Lihat Downline</a>
+                                                    <a href="<?= site_url() ?>admin_member/form/<?= $row['user_id']?>" class="btn btn-default" >View</a>
                                                  
 
                                                 </td> 
@@ -94,10 +109,21 @@
                                                      <?php
 												 }else{
 													 ?>
-                                                     <a href="javascript:void(0)" onclick="confirm_active_member(<?= $row['user_id']; ?>, '<?= site_url().'admin_member/active_member/'; ?>')" class="btn btn-default" title="Aktifkan kembali" >Aktifkan</a>
+                                                    
+                                                     <a href="javascript:void(0)" onclick="confirm_active_member(<?= $row['user_id']; ?>, '<?= site_url().'admin_member/active_member/'; ?>')" class="btn btn-default" >Aktifkan</a>
                                                      <?php
 												 }
 													 ?>
+
+
+                                                     <?php
+                                                 if($row['activation_status'] == 0){
+                                                 ?>
+    
+                                                     <a href="javascript:void(0)" onclick="confirm_activation_manual(<?= $row['user_id']; ?>, '<?= site_url().'admin_member/activation_manual/'; ?>')" class="btn btn-default" title="Aktivasi Manual" >Aktivasi Manual</a>
+                                                     <?php
+                                                 }
+                                                 ?>
                                                    
                                                      <a href="javascript:void(0)" onclick="confirm_delete(<?= $row['user_id']; ?>, '<?= site_url().'admin_member/delete/'; ?>')" class="btn btn-default" ><i class="fa fa-trash-o"></i></a>
 

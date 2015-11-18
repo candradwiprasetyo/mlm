@@ -60,3 +60,10 @@ function confirm_active_member(id,control){
 		window.location.href = control+id;
 	}
 }
+
+function confirm_activation_manual(id,control){
+	var a = confirm("Anda yakin ingin aktivasi member ini ?");
+	if(a==true){
+		window.location.href = control+id;
+	}
+}
