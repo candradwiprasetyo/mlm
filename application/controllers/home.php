@@ -14,11 +14,11 @@ class Home extends CI_Controller {
 		
 		$data['title'] = "Home";
 		
-		if(!$this->session->userdata('visitor')){
+		/*if(!$this->session->userdata('visitor')){
 			$visitor_counter = $this->access->get_visitor();
 			$this->session->set_userdata('visitor', $visitor_counter);
 			$this->access->create_visitor($visitor_counter);
-		}
+		}*/
 		
  		$this->load->view('layout/header', array('data' => $data));
 		$this->load->view('home/index');
@@ -31,10 +31,13 @@ class Home extends CI_Controller {
 	public function login() {
 		
 		$user_login 	= $this->input->post('i_email');
-		$password 	= $this->input->post('i_password');
+		//$password 	= $this->input->post('i_password');
+		$password 	= $this->access->base64url_encode($this->input->post('i_password'));
 		
 		$user_id = $this->home_model->is_valid($user_login, $password);
 
+		
+		
 		if(!$user_id)
 		{				
 			
@@ -49,7 +52,7 @@ class Home extends CI_Controller {
 			
 		}
 	
-		
+	
 	}
 	
 	public function delete_session() {

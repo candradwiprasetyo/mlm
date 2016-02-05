@@ -1,5 +1,18 @@
 <!-- Content Header (Page header) -->
-        
+          <?php
+                if(isset($_GET['did']) && $_GET['did'] == 1){
+                ?>
+              <section class="content_new">
+                   
+               <div class="callout callout-warning">
+                                        <h4>Sukses</h4>
+                                        <p>Edit profil berhasil</p>
+                                    </div>
+           
+                </section>
+            <?php
+                }
+            ?>
                 <!-- Main content -->
                 <section class="content">
                     <div class="row">

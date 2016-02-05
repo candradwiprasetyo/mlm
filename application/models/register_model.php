@@ -133,7 +133,7 @@ class Register_model extends CI_Model{
 	function update_password($email, $password){
 
 		$this->db->trans_start();
-		$data['user_password'] = md5($password);
+		$data['user_password'] = ($password);
 		$this->db->where('user_login', $email);
 		$this->db->update('users', $data);
 	

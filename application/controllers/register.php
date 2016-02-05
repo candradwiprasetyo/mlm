@@ -85,7 +85,7 @@ class Register extends CI_Controller {
 		$data['user_type_id']	 				= 2;
 		$data['user_login'] 					= $this->input->post('i_email');
 		$data['user_code'] 						= $this->input->post('i_code');
-		$data['user_password']	 				= md5($this->input->post('i_password'));
+		$data['user_password']	 				= $this->access->base64url_encode($this->input->post('i_password'));
 		$data['user_name']	 					= $this->input->post('i_name');
 		$data['user_phone'] 					= $this->input->post('i_phone');
 		$data['user_active_status']	 			= 1;
@@ -197,11 +197,12 @@ class Register extends CI_Controller {
 			
 			$chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     		$new_password = substr(str_shuffle($chars),0,8);
-			
-			$this->register_model->update_password($data['email'], $new_password);
+			$new_password_db = $this->access->base64url_encode($new_password);
+
+			$this->register_model->update_password($data['email'], $new_password_db);
 			// kirim email
-			$this->sendMailReset($data['email'], $new_password);
-			//$this->sendMailReset_manual();
+			//$this->sendMailReset($data['email'], $new_password);
+			$this->sendMailReset_manual($data['email'], $new_password);
 		
 		
 			redirect("register/forgot_password?did=1");
@@ -268,13 +269,6 @@ class Register extends CI_Controller {
         $ci = get_instance();
         $ci->load->library('email');
         
-        $config['protocol'] = "smtp";
-        $config['smtp_host'] = "ssl://smtp.gmail.com";
-        $config['smtp_port'] = "465";
-        $config['smtp_user'] = "bisnisiob@gmail.com";
-        $config['smtp_pass'] = "hondatoyotasuzuki";
-        //$config['smtp_crypto'] = 'ssl';
-        
         $config['charset'] = "utf-8";
         $config['newline'] = "\r\n";
         $config['mailtype'] = 'html';
@@ -284,7 +278,8 @@ class Register extends CI_Controller {
  		
 		$data['total_transfer'] = $transfer;
 		
-        $ci->email->from('bisnisiob@gmail.com', 'Admin IOB');
+        $ci->email->from('investas@ivestasionlinebersama.com', 'Admin IOB');
+	    $ci->email->reply_to('bisnisiob@gmail.com', 'Admin IOB');
         $ci->email->to($email);
         $ci->email->subject('Registrasi IOB');
        
@@ -295,6 +290,8 @@ class Register extends CI_Controller {
         } else {
             //show_error($this->email->print_debugger());
         }
+
+       
     }
 	
 	function sendMailReset($email, $new_password) {
@@ -331,48 +328,56 @@ class Register extends CI_Controller {
         }
     }
     
-    function sendmailreset_manual(){
-			/*
-			$message = "Line 1\r\nLine 2\r\nLine 3";
-
-			// In case any of our lines are larger than 70 characters, we should use wordwrap()
-			$message = wordwrap($message, 70, "\r\n");
-			
-			// Send
-			mail('candradwiprasetyo@gmail.com', 'My Subject', $message);
+    function sendmailreset_manual($email, $new_password){
 			
 			
-			
-			$to      = 'candradwiprasetyo@gmail.com';
-			$subject = 'the subject';
-			$message = 'hello';
-			$headers = "From: investas@investasionlinebersama.com\r\n";
-			
-			$headers .= "Reply-To: bisnisiob@gmail.com\r\n";
-			$headers .= "Return-Path: bisnisiob@gmail.com\r\n";
-			//$headers .= "CC: sombodyelse@example.com\r\n";
-			//$headers .= "BCC: hidden@example.com\r\n";
-			
-			mail($to, $subject, $message, $headers);
-			
-			$this->email->set_newline("\r\n");*/
-			
+    	/*
+    	// sukses 
 			$this->load->library('email');
 
-			$this->email->from('investas@investasionlinebersama.com', 'Your Name');
-			$this->email->to('candradwiprasetyo@gmail.com'); 
+			$this->email->from('investas@ivestasionlinebersama.com', 'Admin IOB');
+			$this->email->to($email); 
+			$this->email->reply_to('bisnisiob@gmail.com', 'Admin IOB');
 			//$this->email->cc('another@another-example.com'); 
 			//$this->email->bcc('them@their-example.com'); 
+
 			
-			$this->email->subject('Email Test');
-			$this->email->message('Testing the email class.');	
+			$this->email->subject('Reset Password IOB');
+			$this->email->message('test');	
 			$this->email->set_newline("\r\n");
 			$this->email->send();
 			
 			echo $this->email->print_debugger();
-						
-						 
-						   
+	*/
+
+			 $ci = get_instance();
+	        $ci->load->library('email');
+	        
+	       
+	        
+	        $config['charset'] = "utf-8";
+	        $config['newline'] = "\r\n";
+	        $config['mailtype'] = 'html';
+			//$config['smtp_crypto'] = 'ssl';
+	        
+			
+	        $ci->email->initialize($config);
+	 		
+			$data['new_password'] = $new_password;
+			
+	        $ci->email->from('investas@ivestasionlinebersama.com', 'Admin IOB');
+	        $ci->email->reply_to('bisnisiob@gmail.com', 'Admin IOB');
+	        $ci->email->to($email);
+	        $ci->email->subject('Reset Password IOB');
+	       
+	        $message=$this->load->view('register/reset_password',$data,TRUE);
+			$ci->email->message($message);
+			if ($this->email->send()) {
+	            //echo 'Email sent.';
+	        } else {
+	            //show_error($this->email->print_debugger());
+	        }
+		
 			  
 			    
 	}

@@ -7,10 +7,11 @@ class admin_member_model extends CI_Model{
 	}
 	
 	function list_data() {
-		$query = "select a.*, b.city_name
+		$query = "select a.*, b.city_name, c.user_name as upline_name
 					from users a 
 					left join cities b on b.city_id = a.city_id
-					where user_type_id  = 2
+					left join users c on c.user_id = a.reveral_id
+					where a.user_type_id  = 2
 					order by a.user_id";
         $query = $this->db->query($query);
        // query();

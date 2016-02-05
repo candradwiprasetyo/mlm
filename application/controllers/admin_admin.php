@@ -100,7 +100,7 @@ class admin_admin extends CI_Controller {
 		$data['user_login']	 				= $this->input->post('i_email');
 		$data['user_type_id']	 				= 1;
 		$data['user_active_status']	 				= 1;
-		$data['user_password']			= md5($this->input->post('i_password'));
+		$data['user_password']			= $this->access->base64url_encode($this->input->post('i_password'));
 		
 		$data['user_name']	 				= $this->input->post('i_name');
 		$data['user_phone']	 				= $this->input->post('i_phone');

@@ -278,10 +278,10 @@ function get_show_hide(id){
                     
                      <div class="row">
                         <div class="col-xs-12">
-                            
+                            <div class="title_page"> My Downline</div>
                             
                             <div class="box">
-                             
+                              
                                 <div class="box-body2 table-responsive">
                                    <table id="" class="table table-bordered" style="margin-bottom:0px;">
                                         <thead>
@@ -521,7 +521,65 @@ function get_show_hide(id){
                         </div>
                     </div>
                     
-                 
+
+                    <div class="col-xs-12">
+                 <div class="title_page">Statistik</div>
+<form  class="cmxform" id="createForm" action="<?= $data_head['action']?>" method="post" enctype="multipart/form-data" role="form">
+
+                            
+
+                            <div class="box box-cokelat">
+                                
+                               
+                                <div class="box-body">
+                                    <div class="col-md-12">
+
+                                        <div class="row">
+                                             <table id="example1" class="table table-bordered table-striped">
+                                                
+                                                <?php
+                                                $grand_total = 0;
+                                                for($i=1; $i<=5; $i++){
+                                                    $jml_komisi = $this->admin_account_model->get_jml_komisi($this->session->userdata('user_id'), $i);
+                                                   // $komisi = $this->admin_member_model->get_komisi($this->session->userdata('user_id'), $i);
+                                                    
+                                                switch($i){
+                                                    case 1: $bonus = 50000; break;
+                                                    case 2: $bonus = 10000; break;
+                                                    case 3: $bonus = 10000; break;
+                                                    case 4: $bonus = 10000; break;
+                                                    case 5: $bonus = 50000; break;
+                                                }
+
+                                                $total_komisi = $jml_komisi * $bonus;
+
+                                                ?>
+                                                <tr>
+                                                    <td>-> Komisi member level-<?= $i?> = <?= $jml_komisi ?> x Rp. <?= number_format($bonus,0 )?>,-</td>
+                                                    <td>:</td>
+                                                    <td style="text-align: right; font-weight:bold;">Rp. <?= number_format($total_komisi,0) ?>,-</td>
+                                                </tr>
+                                                <?php
+                                                    $grand_total = $grand_total + $total_komisi;
+                                                }
+                                                ?>
+                                                 <tr style="font-size: 20px;">
+                                                    <td>Total Komisi yang sudah Anda peroleh</td>
+                                                    <td>:</td>
+                                                    <td style="text-align: right; font-weight:bold;">Rp. <?= number_format($grand_total,0) ?>,-</td>
+                                                </tr>
+                                             </table>
+                                        </div>
+                                    </div>
+
+
+                                      <div style="clear:both;"></div>
+                                </div><!-- /.box-body -->
+                                  
+                               
+                            </div><!-- /.box -->
+                            </form>
+</div>
                
                 </section><!-- /.content -->
 

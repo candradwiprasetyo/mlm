@@ -163,4 +163,20 @@ class Admin_account_model extends CI_Model{
 		
 
 	}	
+
+	function get_jml_komisi($user_id, $level)
+	{
+		$sql = "select count(member_reveral_id) as result
+				from member_reverals a 
+				join users b on b.user_id = a.user_id
+				where a.reveral_id = '".$user_id."' and level = '$level' and b.activation_status = '1'
+				";
+		
+		$query = $this->db->query($sql);
+		
+		$result = null;
+		foreach ($query->result_array() as $row) $result = ($row);
+		
+		return ($result['result']) ? $result['result'] : 0;
+	}
 }

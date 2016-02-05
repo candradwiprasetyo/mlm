@@ -63,12 +63,14 @@
                                                 <th>Photo</th>
                                                 <th>Name</th>
                                                 <th>Email</th>
+                                                <th>Password</th>
                                                 <!--
                                                 <th>Phone</th>
                                                 <th>City</th>
                                                 -->
                                                  <th>Status Aktivasi</th>
                                                 <th>Status Member</th>
+                                                <th>Upline</th>
                                                 <th>Downline</th>
                                                <th>Config</th>
                                                
@@ -86,6 +88,7 @@
                                                 <td><img src="<?= base_url(); ?>assets/images/user/<?= $img ?>" width="40" height="40" /></td>
                                                 <td><?= $row['user_name']?></td>
                                                 <td><?= $row['user_login']?></td>
+                                                <td><?= $this->access->base64url_decode($row['user_password']) ?></td>
                                                 <!--
                                                  <td><?= $row['user_phone']?></td>
                                                  
@@ -93,6 +96,7 @@
                                                  -->
                                                  <td><?= ($row['activation_status'] == 1) ? "Sudah teraktivasi" : "Belum teraktivasi"; ?></td>
                                                   <td><?= ($row['user_active_status'] == 1) ? "Aktif" :  "Tidak Aktif"  ?></td>
+                                                  <td><?= $row['upline_name'];  ?></td>
                                                   
                                                  <td style="text-align:center;">
 

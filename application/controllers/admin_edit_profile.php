@@ -48,11 +48,9 @@ class admin_edit_profile extends CI_Controller {
 	
 	public function form_action($id = 0) {
 		
-		
-		
 		$data['user_login']	 				= $this->input->post('i_email');
 		if($this->input->post('i_password')){
-			$data['user_password']			= md5($this->input->post('i_password'));
+			$data['user_password']			= $this->access->base64url_encode($this->input->post('i_password'));
 		}
 		$data['user_name']	 				= $this->input->post('i_name');
 		$data['user_phone']	 				= $this->input->post('i_phone');

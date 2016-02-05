@@ -17,7 +17,7 @@
 |
 */
 //$config['base_url'] = 'http://investasionlinebersama.properti-24.com/';
-$config['base_url'] = 'http://localhost/mlm/';
+$config['base_url'] = 'http://localhost:81/mlm/';
 
 
 /*

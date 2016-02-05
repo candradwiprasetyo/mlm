@@ -9,7 +9,7 @@ class Home_model extends CI_Model{
 	function is_valid($username, $password)
 	{
 		$param['user_login'] = $username;
-		$param['user_password'] = md5($password);
+		$param['user_password'] = ($password);
 		$param['user_active_status'] = '1';
 		
 		$query = $this->db->get_where('users u', $param);
